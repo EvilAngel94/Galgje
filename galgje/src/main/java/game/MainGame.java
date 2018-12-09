@@ -2,6 +2,8 @@ package game;
 
 import java.util.Scanner;
 
+import vervangen.galgje.GalgjeVoorbeeld;
+
 /**
  * This class will make sure the game can be launched and played.
  * 
@@ -48,6 +50,8 @@ public class MainGame {
 
 		case 1:
 			System.out.println(keuze1);
+			GalgjeVoorbeeld voorbeeld = new GalgjeVoorbeeld(scanner);
+			voorbeeld.uitvoeren();
 			break;
 
 		case 2:
