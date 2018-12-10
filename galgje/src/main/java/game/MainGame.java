@@ -2,7 +2,7 @@ package game;
 
 import java.util.Scanner;
 
-import vervangen.galgje.GalgjeVoorbeeld;
+import opstarten.galgje.WoordenlijstUitlezen;
 
 /**
  * This class will make sure the game can be launched and played.
@@ -50,8 +50,8 @@ public class MainGame {
 
 		case 1:
 			System.out.println(keuze1);
-			GalgjeVoorbeeld voorbeeld = new GalgjeVoorbeeld(scanner);
-			voorbeeld.uitvoeren();
+			WoordenlijstUitlezen lezen = new WoordenlijstUitlezen();
+			lezen.leesBestandUit();
 			break;
 
 		case 2:

@@ -7,9 +7,6 @@ public class GalgjeVoorbeeld {
 
 	private final Scanner scanner;
 
-	private int wordLength;
-	private boolean solved;
-
 	private String[] woorden = { "Baan", "apen", "onzin", "test" };
 
 	public GalgjeVoorbeeld(Scanner scanner) {
