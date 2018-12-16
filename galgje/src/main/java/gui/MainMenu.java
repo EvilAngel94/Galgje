@@ -36,9 +36,10 @@ public class MainMenu {
 		case 1:
 			System.out.println(keuze1);
 			WoordenlijstUitlezen lezen = new WoordenlijstUitlezen();
-			GameGUI game = new GameGUI(scanner, galgjeWoorden);
+			
 			try {
 				galgjeWoorden = lezen.readsSelectedCSVFile(TEMPLATE_FILE);
+				GameGUI game = new GameGUI(scanner, galgjeWoorden);
 				game.gamePlay();
 				
 			} catch (IOException e) {

@@ -8,7 +8,6 @@ import java.util.Scanner;
 /**
  * This is the main game GUI. 
  * 
- *
  */
 public class GameGUI {
 
@@ -27,7 +26,7 @@ public class GameGUI {
 	public void gamePlay() {
 		int life = 5;
 		int numberOfGuesses = 0;
-		String woord = woorden[1];
+		String woord = chooseRandomWord();
 		
 
 		char[] filler = new char[woord.length()];
@@ -82,9 +81,19 @@ public class GameGUI {
 	 * @return
 	 */
 	private String chooseRandomWord() {
-		String randomSelectedWord = null;
-		Random random = new Random();
+		int keyValue = randomValue();
+		String randomSelectedWord = galgjeWoorden.get(keyValue);
 		
 		return randomSelectedWord;
+	}
+	
+	private int randomValue() {
+		Random random = new Random();
+		int maxValue = galgjeWoorden.size();
+		//rand.nextInt((max - min) + 1) + min;
+		int keyValue = random.nextInt((maxValue+1 -1) +1) +1;
+		System.out.println(keyValue);
+		
+		return keyValue;
 	}
 }
