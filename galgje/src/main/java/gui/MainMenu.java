@@ -1,16 +1,14 @@
-package opstarten.galgje;
+package gui;
 
 import java.util.Scanner;
 
-public class SpelKeuze {
-
+public class MainMenu {
+	
 	private Scanner scanner;
 	
-	public SpelKeuze(Scanner scanner) {
+	public MainMenu(Scanner scanner) {
 		super();
 		this.scanner = scanner;
 	}
-	
-	
-	
+
 }

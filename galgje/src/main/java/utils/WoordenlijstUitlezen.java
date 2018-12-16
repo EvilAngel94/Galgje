@@ -1,4 +1,4 @@
-package opstarten.galgje;
+package utils;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

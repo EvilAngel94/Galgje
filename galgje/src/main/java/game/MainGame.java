@@ -3,7 +3,7 @@ package game;
 import java.io.IOException;
 import java.util.Scanner;
 
-import opstarten.galgje.WoordenlijstUitlezen;
+import utils.WoordenlijstUitlezen;
 
 /**
  * This class will make sure the game can be launched and played.
