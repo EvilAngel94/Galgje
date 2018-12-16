@@ -1,5 +1,6 @@
 package game;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import opstarten.galgje.WoordenlijstUitlezen;
@@ -15,6 +16,7 @@ public class MainGame {
 	private static final String START = "[1] start";
 	private static final String STOP = "[2] stop";
 	private static final String TAAL = "[3] taal";
+	private static final String TEMPLATE_FILE = "4_words_galgje.csv";
 
 	private final Scanner scanner;
 
@@ -51,7 +53,12 @@ public class MainGame {
 		case 1:
 			System.out.println(keuze1);
 			WoordenlijstUitlezen lezen = new WoordenlijstUitlezen();
-			lezen.leesBestandUit();
+			try {
+				lezen.readsSelectedCSVFile(TEMPLATE_FILE);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			break;
 
 		case 2:
