@@ -29,7 +29,7 @@ public class MainMenu {
 		String keuze2 = "Het spel wordt nu afgesloten";
 		String keuze3 = "Welke taal wil je de woorden?";
 		String keuzeOnbekend = "Sorry onjuiste code ingevoerd.. Probeer opnieuw";
-		
+				
 		int keuze = scanner.nextInt();
 
 		switch (keuze) {
