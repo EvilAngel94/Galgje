@@ -10,6 +10,7 @@ public class MainMenu {
 	
 	private static final String TEMPLATE_FILE = "4_words_galgje.csv";
 	
+	//TODO: deze moeten nog weg.
 	private static final String START = "[1] start";
 	private static final String STOP = "[2] stop";
 	private static final String TAAL = "[3] taal";

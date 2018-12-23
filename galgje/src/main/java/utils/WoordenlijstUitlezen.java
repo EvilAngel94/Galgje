@@ -2,8 +2,9 @@ package utils;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,11 +36,13 @@ public class WoordenlijstUitlezen {
 	 * @throws IOException
 	 */
 	public Map<Integer, String> readsSelectedCSVFile(String wordlist) throws IOException {
-		// InputStream in = this.getClass().getResourceAsStream(TEMPLATE_FILE);
-		// Necessary for reading src/main/resources.
+		//this refers to this class.
+		InputStream inputStream = this.getClass().getResourceAsStream("/galgje_woorden_lijst/" +wordlist);
+		InputStreamReader inputReader = new InputStreamReader(inputStream);
+		
+		
 		try {
-			FileReader file = new FileReader(wordlist);
-			BufferedReader reader = new BufferedReader(file);
+			BufferedReader reader = new BufferedReader(inputReader);
 			String line;
 			String seperator = ",";
 
