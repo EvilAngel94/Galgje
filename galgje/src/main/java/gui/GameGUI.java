@@ -72,28 +72,33 @@ public class GameGUI {
 		}
 
 		if (life == 0) {
+			System.out.println(woord);
 			System.out.println("You lost");
 		}
 	}
 	
 	/**
-	 * Select a random word form the HashMap();
-	 * @return
+	 * Select a random word from the HashMap. 
+	 *  
+	 * @return the word which is selected.
 	 */
 	private String chooseRandomWord() {
-		int keyValue = randomValue();
+		int keyValue = selectRandomKey();
 		String randomSelectedWord = galgjeWoorden.get(keyValue);
 		
 		return randomSelectedWord;
 	}
 	
-	private int randomValue() {
+	/**
+	 * This method generates a random number.
+	 * The number which is randomly generated is used to pick the corresponding word.
+	 * 
+	 * @return keyValue
+	 */
+	private int selectRandomKey() {
 		Random random = new Random();
 		int maxValue = galgjeWoorden.size();
-		//rand.nextInt((max - min) + 1) + min;
 		int keyValue = random.nextInt((maxValue+1 -1) +1) +1;
-		System.out.println(keyValue);
-		
 		return keyValue;
 	}
 }
