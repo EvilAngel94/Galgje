@@ -8,7 +8,7 @@ import utils.WoordenlijstUitlezen;
 
 public class MainMenu {
 	
-	private static final String TEMPLATE_FILE = "4_words_galgje.csv";
+	private static final String WORDS_GALGJE_FOUR = "4_words_galgje.csv";
 	
 	//TODO: deze moeten nog weg.
 	private static final String START = "[1] start";
@@ -39,7 +39,7 @@ public class MainMenu {
 			WoordenlijstUitlezen lezen = new WoordenlijstUitlezen();
 			
 			try {
-				galgjeWoorden = lezen.readsSelectedCSVFile(TEMPLATE_FILE);
+				galgjeWoorden = lezen.readsSelectedCSVFile(WORDS_GALGJE_FOUR);
 				GameGUI game = new GameGUI(scanner, galgjeWoorden);
 				game.gamePlay();
 				
