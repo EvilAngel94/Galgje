@@ -4,48 +4,50 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
-import utils.WoordenlijstUitlezen;
-
+/**
+ * This class is responsible for the main menu of the game. All the calls to other GUI's are made from here and also received if this is necessary.
+ * 
+ * @author PolarBear Dev
+ *
+ */
 public class MainMenu {
-	
-	private static final String WORDS_GALGJE_FOUR = "4_words_galgje.csv";
-	
-	//TODO: deze moeten nog weg.
+
+	// TODO: deze moeten nog weg.
 	private static final String START = "[1] start";
 	private static final String STOP = "[2] stop";
 	private static final String TAAL = "[3] taal";
-	
+
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
-	
+
 	public MainMenu(Scanner scanner) {
 		super();
 		this.setScanner(scanner);
 	}
-	
+
 	public void mainMenu(Scanner scanner) {
 		welcomeText();
 		String keuze1 = "Het spel wordt nu opgestart";
 		String keuze2 = "Het spel wordt nu afgesloten";
 		String keuze3 = "Welke taal wil je de woorden?";
 		String keuzeOnbekend = "Sorry onjuiste code ingevoerd.. Probeer opnieuw";
-				
+
 		int keuze = scanner.nextInt();
 
 		switch (keuze) {
 
 		case 1:
 			System.out.println(keuze1);
-			WoordenlijstUitlezen lezen = new WoordenlijstUitlezen();
-			
+			SelectWordLengthGUI selectLengthGUI = new SelectWordLengthGUI(scanner);
 			try {
-				galgjeWoorden = lezen.readsSelectedCSVFile(WORDS_GALGJE_FOUR);
-				GameGUI game = new GameGUI(scanner, galgjeWoorden);
-				game.gamePlay();
+				galgjeWoorden = selectLengthGUI.loadWordList();
 				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			GameGUI game = new GameGUI(scanner, galgjeWoorden);
+			game.gamePlay();
+
 			break;
 
 		case 2:
@@ -59,8 +61,9 @@ public class MainMenu {
 		default:
 			System.out.println(keuzeOnbekend);
 		}
+
 	}
-	
+
 	/**
 	 * Welcome text.
 	 */
