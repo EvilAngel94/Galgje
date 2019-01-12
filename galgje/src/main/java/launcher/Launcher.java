@@ -1,39 +1,31 @@
-package game;
+package launcher;
 
 import java.util.Scanner;
 
 import gui.MainMenu;
 
-/**
- * This class will make sure the game can be launched and played.
- * 
- * @author Polar Bear Development.
- *
- */
-public class MainGame {
+public class Launcher {
 
 	private final Scanner scanner;
 	private boolean gameLoop = true;
-
-	public MainGame() {
+	
+	public Launcher() {
 		super();
-		scanner = new Scanner(System.in);
+		this.scanner = new Scanner(System.in);
 	}
-
+	
 	public static void main(String[] args) {
-		MainGame game = new MainGame();
-		game.gameLoop();
+		Launcher launcher = new Launcher();
+		launcher.gameLoop();
 
 	}
-
+	
 	private void gameLoop() {
 		MainMenu menu = new MainMenu(scanner);
 		
 		while(gameLoop) {
 			menu.mainMenu(scanner);
-			
 		}
-		
 		
 	}
 

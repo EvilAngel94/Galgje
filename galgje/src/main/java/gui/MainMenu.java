@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
+import game.GameAssembler;
+
 /**
  * This class is responsible for the main menu of the game. All the calls to other GUI's are made from here and also received if this is necessary.
  * 
@@ -23,10 +25,11 @@ public class MainMenu {
 	public MainMenu(Scanner scanner) {
 		super();
 		this.setScanner(scanner);
+		welcomeText();
 	}
 
 	public void mainMenu(Scanner scanner) {
-		welcomeText();
+		keuzeMenuText(); 
 		String keuze1 = "Het spel wordt nu opgestart";
 		String keuze2 = "Het spel wordt nu afgesloten";
 		String keuze3 = "Welke taal wil je de woorden?";
@@ -45,8 +48,8 @@ public class MainMenu {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			GameGUI game = new GameGUI(scanner, galgjeWoorden);
-			game.gamePlay();
+			GameAssembler assembler = new GameAssembler(scanner, galgjeWoorden);
+			assembler.runGameLogic();
 
 			break;
 
@@ -69,6 +72,9 @@ public class MainMenu {
 	 */
 	private void welcomeText() {
 		System.out.println("Welkom bij Galgje!");
+	}
+	
+	private void keuzeMenuText() {
 		System.out.printf("Je kan de volgende opties kiezen: %10s %10s %10s %n%n", START, STOP, TAAL);
 	}
 
