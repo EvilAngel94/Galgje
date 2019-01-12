@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Deze klasse leest de woorden uit van het {@link galgje_woorden_lijst}
@@ -22,7 +21,7 @@ import java.util.Map;
  */
 public class WoordenlijstUitlezen {
 
-	private Map<Integer, String> galgjeWoorden;
+	private HashMap<Integer, String> galgjeWoorden;
 
 	public WoordenlijstUitlezen() {
 		super();
@@ -35,9 +34,9 @@ public class WoordenlijstUitlezen {
 	 * 
 	 * @throws IOException
 	 */
-	public Map<Integer, String> readsSelectedCSVFile(String wordlist) throws IOException {
+	public HashMap<Integer, String> readsSelectedCSVFile(String wordlist) throws IOException {
 		//this refers to this class.
-		InputStream inputStream = this.getClass().getResourceAsStream("/galgje_woorden_lijst/" +wordlist);
+		InputStream inputStream = this.getClass().getResourceAsStream("/galgje_woorden_lijst/" + wordlist);
 		InputStreamReader inputReader = new InputStreamReader(inputStream);
 		
 		

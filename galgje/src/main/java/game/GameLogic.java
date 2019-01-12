@@ -1,4 +1,4 @@
-package gui;
+package game;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -6,15 +6,17 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * This is the main game GUI. 
+ * This class contains the Game logic
  * 
+ * @author Polar Bear Development.
+ *
  */
-public class GameGUI {
-
+public class GameLogic {
+	
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
 	
-	public GameGUI(Scanner scanner, Map<Integer, String> galgjeWoorden) {
+	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden) {
 		super();
 		this.scanner = scanner;
 		this.galgjeWoorden = galgjeWoorden;
@@ -25,7 +27,7 @@ public class GameGUI {
 	 */
 	public void gamePlay() {
 		int life = 5;
-		int numberOfGuesses = 0;
+	//	int numberOfGuesses = 0;
 		String woord = chooseRandomWord();
 		
 
