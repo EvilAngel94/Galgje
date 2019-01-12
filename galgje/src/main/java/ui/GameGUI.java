@@ -1,7 +1,7 @@
-package gui;
+package ui;
 
 /**
- * This is the main game GUI. 
+ * This is the main game UI. 
  * 
  */
 public class GameGUI {

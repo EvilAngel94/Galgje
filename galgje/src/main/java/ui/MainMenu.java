@@ -1,4 +1,4 @@
-package gui;
+package ui;
 
 import java.io.IOException;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class MainMenu {
 
 		case 1:
 			System.out.println(keuze1);
-			SelectWordLengthGUI selectLengthGUI = new SelectWordLengthGUI(scanner);
+			SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner);
 			try {
 				galgjeWoorden = selectLengthGUI.loadWordList();
 				

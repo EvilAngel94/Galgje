@@ -1,4 +1,4 @@
-package gui;
+package ui;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import utils.WoordenlijstUitlezen;
  * This class is responsible to select the right file to be chosen from.
  *
  */
-public class SelectWordLengthGUI {
+public class SelectWordLengthUI {
 
 	private static final String WORDS_GALGJE_FOUR = "4_words_galgje.csv";
 	private static final String WORDS_GALGJE_FIVE = "5_words_galgje.csv";
@@ -19,7 +19,7 @@ public class SelectWordLengthGUI {
 
 	private WoordenlijstUitlezen uitlezen;
 
-	public SelectWordLengthGUI(Scanner scanner) {
+	public SelectWordLengthUI(Scanner scanner) {
 		super();
 		this.scanner = scanner;
 		uitlezen = new WoordenlijstUitlezen();

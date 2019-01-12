@@ -2,7 +2,7 @@ package launcher;
 
 import java.util.Scanner;
 
-import gui.MainMenu;
+import ui.MainMenu;
 
 public class Launcher {
 
