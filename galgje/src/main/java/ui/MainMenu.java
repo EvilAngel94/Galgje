@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import game.GameAssembler;
 import game.SelectDifficultyLevel;
+import utils.Validate;
 
 /**
  * This class is responsible for the main menu of the game. All the calls to
@@ -25,10 +26,13 @@ public class MainMenu {
 
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
+	
+	private Validate validate;
 
 	public MainMenu(Scanner scanner) {
 		super();
 		this.setScanner(scanner);
+		validate = new Validate(getScanner());
 		welcomeText();
 	}
 
@@ -39,7 +43,7 @@ public class MainMenu {
 		String keuze3 = "Welke taal wil je de woorden?";
 		String keuzeOnbekend = "Sorry onjuiste code ingevoerd.. Probeer opnieuw";
 
-		int keuze = validationInput(scanner);
+		int keuze = validate.valideerKeuzeMainMenu();
 
 		switch (keuze) {
 
@@ -71,32 +75,6 @@ public class MainMenu {
 			System.out.println(keuzeOnbekend);
 		}
 
-	}
-
-	private int validationInput(Scanner scanner) {
-		int keuze = 0;
-		boolean validate = false;
-
-		do {
-			if (scanner.hasNextInt()) { // Checks if the input is a valid integer
-				keuze = scanner.nextInt();
-				if (keuze <= 0) {
-					System.out.println("Input moet groter dan 0 zijn");
-					return validationInput(scanner);
-				}
-				if (keuze > 3) {
-					System.out.println("Input mag niet groter zijn dan 3");
-					return validationInput(scanner);
-				}
-				validate = true;
-				return keuze;
-			} else {
-				System.out.println("Verkeerde input, kan alleen hele getallen zijn");
-				scanner.next();
-			}
-		} while (validate == false);
-
-		return keuze;
 	}
 
 	/**

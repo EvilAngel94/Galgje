@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import utils.Validate;
 import utils.WoordenlijstUitlezen;
 
 /**
@@ -18,11 +19,13 @@ public class SelectWordLengthUI {
 	private final Scanner scanner;
 
 	private WoordenlijstUitlezen uitlezen;
+	private Validate valideer;
 
 	public SelectWordLengthUI(Scanner scanner) {
 		super();
 		this.scanner = scanner;
 		uitlezen = new WoordenlijstUitlezen();
+		valideer = new Validate(scanner);
 	}
 
 	/**
@@ -37,7 +40,7 @@ public class SelectWordLengthUI {
 		HashMap<Integer, String> galgjeWoorden = new HashMap<Integer, String>();
 		System.out.println("Selecteer nu je woordenLengte [1] = 4, [2] = 5 letter woorden");
 		
-		int waarde = scanner.nextInt();
+		int waarde = valideer.valideerWoordlengteKeuze();
 		if (waarde == 1) {
 			galgjeWoorden = uitlezen.readsSelectedCSVFile(WORDS_GALGJE_FOUR);
 			return galgjeWoorden;
