@@ -5,11 +5,15 @@ import java.util.Map;
 import java.util.Scanner;
 
 import game.GameAssembler;
+import game.SelectDifficultyLevel;
 
 /**
- * This class is responsible for the main menu of the game. All the calls to other GUI's are made from here and also received if this is necessary.
+ * This class is responsible for the main menu of the game. All the calls to
+ * other GUI's are made from here and also received if this is necessary.
  * 
  * @author PolarBear Dev
+ * 
+ *         https://wiki.jmonkeyengine.org/jme3/advanced/nifty_gui.html
  *
  */
 public class MainMenu {
@@ -29,13 +33,13 @@ public class MainMenu {
 	}
 
 	public void mainMenu(Scanner scanner) {
-		keuzeMenuText(); 
+		keuzeMenuText();
 		String keuze1 = "Het spel wordt nu opgestart";
 		String keuze2 = "Het spel wordt nu afgesloten";
 		String keuze3 = "Welke taal wil je de woorden?";
 		String keuzeOnbekend = "Sorry onjuiste code ingevoerd.. Probeer opnieuw";
 
-		int keuze = scanner.nextInt();
+		int keuze = validationInput(scanner);
 
 		switch (keuze) {
 
@@ -44,11 +48,13 @@ public class MainMenu {
 			SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner);
 			try {
 				galgjeWoorden = selectLengthGUI.loadWordList();
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			GameAssembler assembler = new GameAssembler(scanner, galgjeWoorden);
+			SelectDifficultyLevel difficultyLevel = new SelectDifficultyLevel(scanner);
+			int difficulty = difficultyLevel.selectAmountOfLives();
+			GameAssembler assembler = new GameAssembler(scanner, galgjeWoorden, difficulty);
 			assembler.runGameLogic();
 
 			break;
@@ -67,13 +73,39 @@ public class MainMenu {
 
 	}
 
+	private int validationInput(Scanner scanner) {
+		int keuze = 0;
+		boolean validate = false;
+
+		do {
+			if (scanner.hasNextInt()) { // Checks if the input is a valid integer
+				keuze = scanner.nextInt();
+				if (keuze <= 0) {
+					System.out.println("Input moet groter dan 0 zijn");
+					return validationInput(scanner);
+				}
+				if (keuze > 3) {
+					System.out.println("Input mag niet groter zijn dan 3");
+					return validationInput(scanner);
+				}
+				validate = true;
+				return keuze;
+			} else {
+				System.out.println("Verkeerde input, kan alleen hele getallen zijn");
+				scanner.next();
+			}
+		} while (validate == false);
+
+		return keuze;
+	}
+
 	/**
 	 * Welcome text.
 	 */
 	private void welcomeText() {
 		System.out.println("Welkom bij Galgje!");
 	}
-	
+
 	private void keuzeMenuText() {
 		System.out.printf("Je kan de volgende opties kiezen: %10s %10s %10s %n%n", START, STOP, TAAL);
 	}

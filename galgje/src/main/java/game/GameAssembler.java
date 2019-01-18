@@ -16,20 +16,24 @@ public class GameAssembler {
 
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
+	private int difficulty;
 	
-	public GameAssembler(Scanner scanner, Map<Integer, String> galgjeWoorden) {
+	public GameAssembler(Scanner scanner, Map<Integer, String> galgjeWoorden, int difficulty) {
 		super();
 		this.scanner = scanner;
 		this.galgjeWoorden = galgjeWoorden;
+		this.difficulty = difficulty;
 	}
 
 	/**
 	 * This method is responsible for running the game itself.
 	 */
 	public void runGameLogic() {
-		GameLogic gameLogic = new GameLogic(scanner, galgjeWoorden);
+		GameLogic gameLogic = new GameLogic(scanner, galgjeWoorden, difficulty);
 		gameLogic.gamePlay();
 	}
+	
+	
 	
 	
 }

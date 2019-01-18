@@ -25,8 +25,6 @@ public class Launcher {
 		
 		while(gameLoop) {
 			menu.mainMenu(scanner);
-		}
-		
+		}	
 	}
-
 }

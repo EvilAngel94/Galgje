@@ -15,18 +15,20 @@ public class GameLogic {
 	
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
+	private int difficulty;
 	
-	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden) {
+	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden, int difficulty) {
 		super();
 		this.scanner = scanner;
 		this.galgjeWoorden = galgjeWoorden;
+		this.difficulty = difficulty;
 	}
 
 	/**
 	 * This is the main game which will be played when choosing the game option.
 	 */
 	public void gamePlay() {
-		int life = 5;
+		int life = difficulty;
 	//	int numberOfGuesses = 0;
 		String woord = chooseRandomWord();
 		
@@ -46,7 +48,7 @@ public class GameLogic {
 		ArrayList<Character> list = new ArrayList<Character>();
 		
 		while (life > 0) { // gaat door zolang het kan.
-			char x = scanner.next().charAt(0);
+			char x = scanner.next().charAt(0); //Controle puur op eerste imput
 
 			if (list.contains(x)) {
 				System.out.println("You've already enterd: " + x);
