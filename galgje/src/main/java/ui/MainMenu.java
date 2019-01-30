@@ -22,6 +22,9 @@ import utils.Validate;
  */
 public class MainMenu {
 
+	//This is the window that will be the UI
+	private long window;
+	
 	// TODO: deze moeten nog weg.
 	private static final String START = "[1] start";
 	private static final String STOP = "[2] stop";
