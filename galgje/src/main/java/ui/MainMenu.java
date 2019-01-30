@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
 import game.GameAssembler;
 import game.SelectDifficultyLevel;
 import utils.Validate;
@@ -26,7 +29,7 @@ public class MainMenu {
 
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
-	
+
 	private Validate validate;
 
 	public MainMenu(Scanner scanner) {
@@ -77,9 +80,6 @@ public class MainMenu {
 
 	}
 
-	/**
-	 * Welcome text.
-	 */
 	private void welcomeText() {
 		System.out.println("Welkom bij Galgje!");
 	}
