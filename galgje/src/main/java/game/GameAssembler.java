@@ -29,8 +29,13 @@ public class GameAssembler {
 	 * This method is responsible for running the game itself.
 	 */
 	public void runGameLogic() {
+		boolean returnToMainMenu;
+		
 		GameLogic gameLogic = new GameLogic(scanner, galgjeWoorden, difficulty);
-		gameLogic.gamePlay();
+		do {
+			returnToMainMenu = gameLogic.gamePlay();
+			
+		} while(returnToMainMenu);
 	}
 	
 }

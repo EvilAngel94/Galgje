@@ -14,11 +14,11 @@ import java.util.Scanner;
  *
  */
 public class GameLogic {
-	
+
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
 	private int difficulty;
-	
+
 	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden, int difficulty) {
 		super();
 		this.scanner = scanner;
@@ -29,11 +29,10 @@ public class GameLogic {
 	/**
 	 * This is the main game which will be played when choosing the game option.
 	 */
-	public void gamePlay() {
+	public boolean gamePlay() {
 		int life = difficulty;
-	//	int numberOfGuesses = 0;
+		// int numberOfGuesses = 0;
 		String woord = chooseRandomWord();
-		
 
 		char[] filler = new char[woord.length()];
 		int i = 0;
@@ -48,15 +47,15 @@ public class GameLogic {
 		System.out.print(filler);
 		System.out.println("    life remaining = " + life);
 		ArrayList<Character> list = new ArrayList<>();
-		
+
 		while (life > 0) { // gaat door zolang het kan.
-			char x = scanner.next().charAt(0); //Controle puur op eerste imput
+			char x = scanner.next().charAt(0); // Controle puur op eerste imput
 
 			if (list.contains(x)) {
 				System.out.println("You've already enterd: " + x);
 				continue;
 			}
-			
+
 			list.add(x);
 			if (woord.contains(x + "")) {
 				for (int y = 0; y < woord.length(); y++) {
@@ -81,35 +80,55 @@ public class GameLogic {
 			System.out.println(woord);
 			System.out.println("You lost");
 		}
+
+		return wantToPlayAnotherGame();
 	}
-	
+
+	//TODO: validator toevoegen
+	private boolean wantToPlayAnotherGame() {
+		System.out.println("Do you want to play again? [1] = Yes [2] = No");
+		int waarde = scanner.nextInt();
+
+		if (waarde < 0 || waarde > 2) {
+			System.out.println("Please enter a valid value. Either 1 (Yes) or 2 (No).");
+			return wantToPlayAnotherGame();
+		}
+		if (waarde == 1) {
+			return true;
+		}
+		if (waarde == 2) {
+			return false;
+		}
+		return wantToPlayAnotherGame();
+	}
+
 	/**
-	 * Select a random word from the HashMap. 
-	 *  
+	 * Select a random word from the HashMap.
+	 * 
 	 * @return the word which is selected.
 	 */
 	private String chooseRandomWord() {
 		int keyValue = selectRandomKey();
-		if(keyValue == 0) {
+		if (keyValue == 0) {
 			System.out.println("ERRORRR! Geen geldige waarde gevonden!");
 		}
 		return galgjeWoorden.get(keyValue);
-		
+
 	}
-	
+
 	/**
-	 * This method generates a random number.
-	 * The number which is randomly generated is used to pick the corresponding word.
+	 * This method generates a random number. The number which is randomly generated
+	 * is used to pick the corresponding word.
 	 * 
 	 * @return keyValue
 	 */
-	private int selectRandomKey(){
+	private int selectRandomKey() {
 		Random random;
 		try {
 			random = SecureRandom.getInstanceStrong();
 			int maxValue = galgjeWoorden.size();
-			return random.nextInt((maxValue+1 -1) +1) +1;
-			
+			return random.nextInt((maxValue + 1 - 1) + 1) + 1;
+
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
