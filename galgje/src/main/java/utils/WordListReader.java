@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Deze klasse leest de woorden uit van het {@link galgje_woorden_lijst}
@@ -19,13 +20,13 @@ import java.util.HashMap;
  * {@link https://docs.oracle.com/javase/8/docs/api/java/io/FileReader.html}
  *
  */
-public class WoordenlijstUitlezen {
+public class WordListReader {
 
-	private HashMap<Integer, String> galgjeWoorden;
+	private Map<Integer, String> hangmanWords;
 
-	public WoordenlijstUitlezen() {
+	public WordListReader() {
 		super();
-		galgjeWoorden = new HashMap<Integer, String>();
+		hangmanWords = new HashMap<>();
 
 	}
 
@@ -34,18 +35,18 @@ public class WoordenlijstUitlezen {
 	 * 
 	 * @throws IOException
 	 */
-	public HashMap<Integer, String> readsSelectedCSVFile(String wordlist) throws IOException {
+	public Map<Integer, String> readsSelectedCSVFile(String wordlist) throws IOException {
 		//this refers to this class.
-		InputStream inputStream = this.getClass().getResourceAsStream("/galgje_woorden_lijst/" + wordlist);
+		InputStream inputStream = this.getClass().getResourceAsStream("/hangman_word_list/" + wordlist);
 		InputStreamReader inputReader = new InputStreamReader(inputStream);
 		
 		
-		try {
-			BufferedReader reader = new BufferedReader(inputReader);
-			String line;
-			String seperator = ",";
+		try (BufferedReader reader = new BufferedReader(inputReader)){
 
-			reader.readLine(); // This reads the first line.
+			String seperator = ",";
+			
+			//first line should be ignored, that's why the value is not used
+			String line = reader.readLine(); 
 
 			// This checks if the reader has a next line.
 			while ((line = reader.readLine()) != null) {
@@ -54,15 +55,12 @@ public class WoordenlijstUitlezen {
 				int id = Integer.parseInt(field[0]);
 				String word = field[1];
 
-				galgjeWoorden.put(id, word);
+				hangmanWords.put(id, word);
 			}
-
-			reader.close();
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
-		return galgjeWoorden;
+		return hangmanWords;
 	}
 }

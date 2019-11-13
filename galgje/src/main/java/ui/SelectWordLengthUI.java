@@ -2,10 +2,11 @@ package ui;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import utils.Validate;
-import utils.WoordenlijstUitlezen;
+import utils.WordListReader;
 
 /**
  * This class is responsible to select the right file to be chosen from.
@@ -18,13 +19,13 @@ public class SelectWordLengthUI {
 
 	private final Scanner scanner;
 
-	private WoordenlijstUitlezen uitlezen;
+	private WordListReader uitlezen;
 	private Validate valideer;
 
 	public SelectWordLengthUI(Scanner scanner) {
 		super();
 		this.scanner = scanner;
-		uitlezen = new WoordenlijstUitlezen();
+		uitlezen = new WordListReader();
 		valideer = new Validate(scanner);
 	}
 
@@ -35,9 +36,9 @@ public class SelectWordLengthUI {
 	 * 
 	 * @throws IOException
 	 */
-	public HashMap<Integer, String> loadWordList() throws IOException {
+	public Map<Integer, String> loadWordList() throws IOException {
 		
-		HashMap<Integer, String> galgjeWoorden = new HashMap<Integer, String>();
+		Map<Integer, String> galgjeWoorden = new HashMap<>();
 		System.out.println("Selecteer nu je woordenLengte [1] = 4, [2] = 5 letter woorden");
 		
 		int waarde = valideer.valideerWoordlengteKeuze();

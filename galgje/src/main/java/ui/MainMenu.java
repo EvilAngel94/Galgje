@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
-import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
 import game.GameAssembler;
 import game.SelectDifficultyLevel;
 import utils.Validate;

@@ -1,5 +1,7 @@
 package game;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
@@ -45,7 +47,7 @@ public class GameLogic {
 
 		System.out.print(filler);
 		System.out.println("    life remaining = " + life);
-		ArrayList<Character> list = new ArrayList<Character>();
+		ArrayList<Character> list = new ArrayList<>();
 		
 		while (life > 0) { // gaat door zolang het kan.
 			char x = scanner.next().charAt(0); //Controle puur op eerste imput
@@ -88,9 +90,11 @@ public class GameLogic {
 	 */
 	private String chooseRandomWord() {
 		int keyValue = selectRandomKey();
-		String randomSelectedWord = galgjeWoorden.get(keyValue);
+		if(keyValue == 0) {
+			System.out.println("ERRORRR! Geen geldige waarde gevonden!");
+		}
+		return galgjeWoorden.get(keyValue);
 		
-		return randomSelectedWord;
 	}
 	
 	/**
@@ -99,10 +103,16 @@ public class GameLogic {
 	 * 
 	 * @return keyValue
 	 */
-	private int selectRandomKey() {
-		Random random = new Random();
-		int maxValue = galgjeWoorden.size();
-		int keyValue = random.nextInt((maxValue+1 -1) +1) +1;
-		return keyValue;
+	private int selectRandomKey(){
+		Random random;
+		try {
+			random = SecureRandom.getInstanceStrong();
+			int maxValue = galgjeWoorden.size();
+			return random.nextInt((maxValue+1 -1) +1) +1;
+			
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }
