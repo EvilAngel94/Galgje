@@ -9,20 +9,12 @@ import game.SelectDifficultyLevel;
 import utils.Validate;
 
 /**
- * This class is responsible for the main menu of the game. All the calls to
- * other GUI's are made from here and also received if this is necessary.
+ * This class is responsible for the main interactions with the game.
  * 
  * @author PolarBear Dev
- * 
- *         https://wiki.jmonkeyengine.org/jme3/advanced/nifty_gui.html
- *
  */
 public class MainMenu {
-
-	//This is the window that will be the UI
-	private long window;
 	
-	// TODO: deze moeten nog weg.
 	private static final String START = "[1] start";
 	private static final String STOP = "[2] stop";
 	private static final String TAAL = "[3] taal";
@@ -39,7 +31,8 @@ public class MainMenu {
 		welcomeText();
 	}
 
-	public void mainMenu(Scanner scanner) {
+	public boolean mainMenu() {
+		boolean continueGame = true;
 		keuzeMenuText();
 		String keuze1 = "Het spel wordt nu opgestart";
 		String keuze2 = "Het spel wordt nu afgesloten";
@@ -54,10 +47,13 @@ public class MainMenu {
 			System.out.println(keuze1);
 			SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner);
 			try {
+				
 				galgjeWoorden = selectLengthGUI.loadWordList();
-
+				
 			} catch (IOException e) {
 				e.printStackTrace();
+				System.out.println("Game is stoped, something went wrong while loading the words from the file.");
+				return false;
 			}
 			SelectDifficultyLevel difficultyLevel = new SelectDifficultyLevel(scanner);
 			int difficulty = difficultyLevel.selectAmountOfLives();
@@ -68,16 +64,18 @@ public class MainMenu {
 
 		case 2:
 			System.out.println(keuze2);
+			continueGame = false;
 			break;
 
 		case 3:
 			System.out.println(keuze3);
 			break;
-
+		
 		default:
 			System.out.println(keuzeOnbekend);
 		}
-
+		
+		return continueGame;
 	}
 
 	private void welcomeText() {

@@ -5,8 +5,7 @@ import java.util.Scanner;
 public class SelectDifficultyLevel {
 
 	private Scanner scanner;
-	private int difficulty;
-
+	
 	public SelectDifficultyLevel(Scanner scanner) {
 		super();
 		this.scanner = scanner;
@@ -14,7 +13,7 @@ public class SelectDifficultyLevel {
 	}
 
 	public int selectAmountOfLives() {
-		difficulty = 0;
+		int difficulty = 0;
 		boolean validate = false;
 
 		do {

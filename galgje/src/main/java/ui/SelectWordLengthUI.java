@@ -1,7 +1,6 @@
 package ui;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -26,19 +25,12 @@ public class SelectWordLengthUI {
 		super();
 		this.scanner = scanner;
 		uitlezen = new WordListReader();
-		valideer = new Validate(scanner);
+		valideer = new Validate(this.scanner);
 	}
 
-	/**
-	 * This method loads the wordList based on the input given.
-	 * 
-	 * @return an HashMap from the 
-	 * 
-	 * @throws IOException
-	 */
 	public Map<Integer, String> loadWordList() throws IOException {
 		
-		Map<Integer, String> galgjeWoorden = new HashMap<>();
+		Map<Integer, String> galgjeWoorden = null;
 		System.out.println("Selecteer nu je woordenLengte [1] = 4, [2] = 5 letter woorden");
 		
 		int waarde = valideer.valideerWoordlengteKeuze();

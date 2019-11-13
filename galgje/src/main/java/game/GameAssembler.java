@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * This class is responsible to combine all the information gatherd for the startup of the game.
- * As well as processing the incomming data and distributing this to the other components.
+ * This class is responsible to combine all the information gathered for the startup of the game.
+ * As well as processing the incoming data and distributing this to the other components.
  * 
  * {@link GameLogic} 
  *  
@@ -32,8 +32,5 @@ public class GameAssembler {
 		GameLogic gameLogic = new GameLogic(scanner, galgjeWoorden, difficulty);
 		gameLogic.gamePlay();
 	}
-	
-	
-	
 	
 }
