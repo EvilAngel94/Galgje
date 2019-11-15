@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import game.GameAssembler;
 import game.SelectDifficultyLevel;
-import utils.Validate;
+import utils.Validator;
 
 /**
  * This class is responsible for the main interactions with the game.
@@ -20,14 +20,13 @@ public class MainMenu {
 	private static final String TAAL = "[3] taal";
 
 	private Scanner scanner;
-	private Map<Integer, String> galgjeWoorden;
 
-	private Validate validate;
+	private Validator validate;
 
 	public MainMenu(Scanner scanner) {
 		super();
 		this.setScanner(scanner);
-		validate = new Validate(getScanner());
+		validate = new Validator(getScanner());
 		welcomeText();
 	}
 
@@ -39,13 +38,15 @@ public class MainMenu {
 		String keuze3 = "Welke taal wil je de woorden?";
 		String keuzeOnbekend = "Sorry onjuiste code ingevoerd.. Probeer opnieuw";
 
-		int keuze = validate.valideerKeuzeMainMenu();
-
+		int keuze = validate.validateUserInput(1,3);
+		
 		switch (keuze) {
 
 		case 1:
 			System.out.println(keuze1);
 			SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner);
+			Map<Integer, String> galgjeWoorden;
+			
 			try {
 				
 				galgjeWoorden = selectLengthGUI.loadWordList();
