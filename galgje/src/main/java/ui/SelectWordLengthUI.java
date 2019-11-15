@@ -19,13 +19,11 @@ public class SelectWordLengthUI {
 	private final Scanner scanner;
 
 	private WordListReader uitlezen;
-	private Validator valideer;
 
 	public SelectWordLengthUI(Scanner scanner) {
 		super();
 		this.scanner = scanner;
 		uitlezen = new WordListReader();
-		valideer = new Validator(this.scanner);
 	}
 
 	public Map<Integer, String> loadWordList() throws IOException {
@@ -33,7 +31,7 @@ public class SelectWordLengthUI {
 		Map<Integer, String> galgjeWoorden = null;
 		System.out.println("Selecteer nu je woordenLengte [1] = 4, [2] = 5 letter woorden");
 
-		int waarde = valideer.validateUserInput(1, 2);
+		int waarde = Validator.validateUserInput(scanner, 1, 2);
 		if (waarde == 1) {
 			galgjeWoorden = uitlezen.readsSelectedCSVFile(WORDS_GALGJE_FOUR);
 			return galgjeWoorden;

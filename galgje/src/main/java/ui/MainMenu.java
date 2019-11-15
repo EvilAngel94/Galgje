@@ -21,12 +21,9 @@ public class MainMenu {
 
 	private Scanner scanner;
 
-	private Validator validate;
-
 	public MainMenu(Scanner scanner) {
 		super();
-		this.setScanner(scanner);
-		validate = new Validator(getScanner());
+		this.scanner = scanner;
 		welcomeText();
 	}
 
@@ -38,7 +35,7 @@ public class MainMenu {
 		String keuze3 = "Welke taal wil je de woorden?";
 		String keuzeOnbekend = "Sorry onjuiste code ingevoerd.. Probeer opnieuw";
 
-		int keuze = validate.validateUserInput(1,3);
+		int keuze = Validator.validateUserInput(scanner, 1, 2);
 		
 		switch (keuze) {
 
