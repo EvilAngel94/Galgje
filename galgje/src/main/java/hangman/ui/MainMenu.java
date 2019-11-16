@@ -1,12 +1,12 @@
-package ui;
+package hangman.ui;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
-import game.GameAssembler;
-import game.SelectDifficultyLevel;
-import utils.Validator;
+import hangman.game.GameAssembler;
+import hangman.game.SelectDifficultyLevel;
+import hangman.utils.Validator;
 
 /**
  * This class is responsible for the main interactions with the game.

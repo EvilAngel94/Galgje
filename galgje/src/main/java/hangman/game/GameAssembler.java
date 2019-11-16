@@ -1,4 +1,4 @@
-package game;
+package hangman.game;
 
 import java.util.Map;
 import java.util.Scanner;

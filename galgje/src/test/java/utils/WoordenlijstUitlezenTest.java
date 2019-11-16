@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import hangman.utils.WordListReader;
+
 public class WoordenlijstUitlezenTest{
 	
 	private Map<Integer, String> galgjeWoorden = new HashMap<>();

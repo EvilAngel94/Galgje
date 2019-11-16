@@ -1,10 +1,15 @@
-package launcher;
+package hangman.launcher;
 
 import java.util.Scanner;
 
-import ui.MainMenu;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import hangman.ui.MainMenu;
 
 public class MainApplication {
+	
+	private static final Logger LOGGER = LogManager.getLogger(MainApplication.class);
 
 	private final Scanner scanner;
 	
@@ -18,6 +23,7 @@ public class MainApplication {
 	}
 	
 	private void gameLoop() {
+		LOGGER.info("Game is starting..");
 		boolean gameLoop;
 		
 		do {
@@ -25,6 +31,7 @@ public class MainApplication {
 			
 		} while (gameLoop);
 		
+		LOGGER.info("Game is finished. The application is closable now.");
 		System.out.println("Game is finished. You can close the application now.");
 	}
 }

@@ -1,4 +1,4 @@
-package game;
+package hangman.game;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

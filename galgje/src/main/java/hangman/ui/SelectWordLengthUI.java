@@ -1,11 +1,11 @@
-package ui;
+package hangman.ui;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
-import utils.Validator;
-import utils.WordListReader;
+import hangman.utils.Validator;
+import hangman.utils.WordListReader;
 
 /**
  * This class is responsible to select the right file to be chosen from.
