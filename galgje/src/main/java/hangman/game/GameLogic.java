@@ -10,6 +10,8 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import hangman.utils.Validator;
+
 /**
  * This class contains the Game logic
  * 
@@ -17,7 +19,7 @@ import org.apache.logging.log4j.Logger;
  *
  */
 public class GameLogic {
-	
+
 	private static final Logger LOGGER = LogManager.getLogger(GameLogic.class);
 
 	private Scanner scanner;
@@ -34,14 +36,21 @@ public class GameLogic {
 	/**
 	 * This is the main game which will be played when choosing the game option.
 	 */
-	public boolean gamePlay() {
+	public boolean actualGameLoop() {
+		LOGGER.info("Main game loop is about to run with {} amout of lives.", difficulty);
 		int life = difficulty;
 		String woord = chooseRandomWord();
 
 		char[] filler = new char[woord.length()];
+
 		int i = 0;
-		
-		createEmptyDisplayString(woord, filler, i);
+		while (i < woord.length()) {
+			filler[i] = '-';
+			if (woord.charAt(i) == ' ') {
+				filler[i] = ' ';
+			}
+			i++;
+		}
 
 		System.out.print(filler);
 		System.out.println("    life remaining = " + life);
@@ -83,32 +92,37 @@ public class GameLogic {
 		return wantToPlayAnotherGame();
 	}
 
-	private void createEmptyDisplayString(String woord, char[] filler, int i) {
-		while (i < woord.length()) {
-			filler[i] = '-';
-			if (woord.charAt(i) == ' ') {
-				filler[i] = ' ';
-			}
-			i++;
-		}
-	}
-
-	//TODO: validator toevoegen
 	private boolean wantToPlayAnotherGame() {
-		System.out.println("Do you want to play again? [1] = Yes [2] = No");
-		int waarde = scanner.nextInt();
-
-		if (waarde < 0 || waarde > 2) {
-			System.out.println("Please enter a valid value. Either 1 (Yes) or 2 (No).");
+		LOGGER.info("Do you want to play again? [1] = Yes [2] = No");
+		String input = scanner.next();
+		if(!isInputValid(input)) {
 			return wantToPlayAnotherGame();
 		}
-		if (waarde == 1) {
+		int keuze = Integer.parseInt(input);
+		
+		if (keuze == 1) {
 			return true;
 		}
-		if (waarde == 2) {
+		if (keuze == 2) {
 			return false;
 		}
 		return wantToPlayAnotherGame();
+	}
+
+	private boolean isInputValid(String input) {
+		if(!Validator.isNummeric(input)) {
+			LOGGER.info("Please enter a valid value. Either 1 (Yes) or 2 (No).");
+			return false;
+		}
+		if(Validator.inputIsGreaterThanHighestValue(input, 2)) {
+			LOGGER.info("Please enter a number lower than 2");
+			return false;
+		}
+		if(Validator.inputIsSmallerThanSmallestValue(input, 1)) {
+			LOGGER.info("Please enter a number higher than 1");
+			return false;
+		}
+		return true;
 	}
 
 	/**

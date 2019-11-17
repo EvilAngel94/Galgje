@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import hangman.utils.Validator;
 import hangman.utils.WordListReader;
 
@@ -12,6 +15,8 @@ import hangman.utils.WordListReader;
  *
  */
 public class SelectWordLengthUI {
+
+	private static final Logger LOGGER = LogManager.getLogger(SelectWordLengthUI.class);
 
 	private static final String WORDS_GALGJE_FOUR = "4_words_galgje.csv";
 	private static final String WORDS_GALGJE_FIVE = "5_words_galgje.csv";
@@ -31,17 +36,43 @@ public class SelectWordLengthUI {
 		Map<Integer, String> galgjeWoorden = null;
 		System.out.println("Selecteer nu je woordenLengte [1] = 4, [2] = 5 letter woorden");
 
-		int waarde = Validator.validateUserInput(scanner, 1, 2);
-		if (waarde == 1) {
+		String input = scanner.next();
+		if (!inputIsValid(input)) {
+			loadWordList();
+		}
+		int keuze = Integer.parseInt(input);
+
+		if (keuze == 1) {
 			galgjeWoorden = uitlezen.readsSelectedCSVFile(WORDS_GALGJE_FOUR);
 			return galgjeWoorden;
 		}
-		if (waarde == 2) {
+		if (keuze == 2) {
 			galgjeWoorden = uitlezen.readsSelectedCSVFile(WORDS_GALGJE_FIVE);
 			return galgjeWoorden;
 		}
-		System.out.println("Sorry please provide a valid input");
-		return loadWordList();
+
+		return galgjeWoorden;
+	}
+
+	private boolean inputIsValid(String input) {
+		if (!Validator.isNummeric(input)) {
+			System.out.println("Please enter a valid number.");
+			return false;
+		}
+
+		if (Validator.inputIsSmallerThanSmallestValue(input, 1)) {
+			LOGGER.info("Input is smaller than smallest value. Input should be bigger than {}", 1);
+			System.out.println("Input is smaller than smallest value.");
+			return false;
+		}
+
+		if (Validator.inputIsGreaterThanHighestValue(input, 2)) {
+			LOGGER.info("Input is greater than the higest value. Input should be smaller than {}", 2);
+			System.out.println("Input is invalid. Please provide a lower number");
+			return false;
+		}
+		return true;
+
 	}
 
 }

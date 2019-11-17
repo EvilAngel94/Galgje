@@ -33,7 +33,7 @@ public class GameAssembler {
 		
 		GameLogic gameLogic = new GameLogic(scanner, galgjeWoorden, difficulty);
 		do {
-			returnToMainMenu = gameLogic.gamePlay();
+			returnToMainMenu = gameLogic.actualGameLoop();
 			
 		} while(returnToMainMenu);
 	}

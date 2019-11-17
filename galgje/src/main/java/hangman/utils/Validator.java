@@ -1,46 +1,43 @@
 package hangman.utils;
 
-import java.util.Scanner;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+/**
+ * This class is responsible for all the validations of the project. 
+ * Within this class only a 'generic' method should be made.
+ * 
+ * If an error should be displayed, these should be stated when the validator is called.
+ * 
+ * @author PolarBear Dev
+ *
+ */
 public class Validator {
-	
-	private static final Logger LOGGER = LogManager.getLogger(Validator.class);
+
+	private static final String NUMMERIC_REGEX = "^[0-9]*$";
 
 	private Validator() {
 		super();
 	}
 
-	public static int validateUserInput(Scanner scanner, int smallestValue, int highestValue) {
-		LOGGER.info("Validating the following input: SCANNER OBJECT.. with the following conditions: smallest {}, highestValue {}", smallestValue, highestValue);
-		int keuze = 0;
-		boolean validInput = false;
+	public static boolean isNummeric(String input) {
+		// would return null if the input does not match the regular expression.
+		if(input.matches(NUMMERIC_REGEX)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean inputIsSmallerThanSmallestValue(String input, int smallestValue) {
+		if(input == null || input.equals("")) {
+			return true;
+		}
+		int keuze = Integer.parseInt(input);
+		return keuze < smallestValue;
+	}
 
-		do {
-			if (scanner.hasNextInt()) { // Checks if the input is a valid integer
-				keuze = scanner.nextInt();
-				
-				if (keuze < smallestValue) {
-					LOGGER.info("Input is smaller than smallest value. Input should be bigger than {}", smallestValue);
-					System.out.println("Input moet groter dan " + smallestValue + " zijn");
-					return validateUserInput(scanner, smallestValue, highestValue);
-				}
-				
-				if (keuze > highestValue) {
-					LOGGER.info("Input is greater than the greatest value. Input should be smaller than {}", highestValue);
-					System.out.println("Input mag niet groter zijn dan " + highestValue);
-					return validateUserInput(scanner, smallestValue, highestValue);
-				}
-				
-				validInput = true;
-			} else {
-				LOGGER.info("Wrong input, can only play with whole numbers. Decimals and letters are not recognised.");
-				System.out.println("Verkeerde input, kan alleen hele getallen zijn");
-				scanner.next();
-			}
-		} while (!validInput);
-		return keuze;
+	public static boolean inputIsGreaterThanHighestValue(String input, int highestValue) {
+		if(input == null || input.equals("")) {
+			return true;
+		}
+		int keuze = Integer.parseInt(input);
+		return keuze > highestValue;
 	}
 }

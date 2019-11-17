@@ -16,3 +16,16 @@
 [INFO ] 2019-11-17 17:10:50.034 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
 [INFO ] 2019-11-17 17:10:54.311 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
 [INFO ] 2019-11-17 17:10:55.244 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-17 18:36:25.129 [main] MainApplication - Game is starting..
+[INFO ] 2019-11-17 18:36:25.143 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
+[INFO ] 2019-11-17 18:36:27.569 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
+[INFO ] 2019-11-17 18:36:28.749 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-17 18:36:30.287 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
+[INFO ] 2019-11-17 19:12:46.836 [main] MainApplication - Game is starting..
+[INFO ] 2019-11-17 19:12:49.817 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-17 19:12:51.757 [main] GameLogic - Main game loop is about to run with 5 amout of lives.
+[INFO ] 2019-11-17 19:13:38.470 [main] MainApplication - Game is starting..
+[INFO ] 2019-11-17 19:13:41.544 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-17 19:13:43.457 [main] GameLogic - Main game loop is about to run with 5 amout of lives.
+[INFO ] 2019-11-17 19:15:06.882 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-17 19:15:06.885 [main] WordListReader - Wordlist is being loaded with the following name: 5_words_galgje.csv
