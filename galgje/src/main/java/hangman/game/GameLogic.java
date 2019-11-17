@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * This class contains the Game logic
  * 
@@ -14,6 +17,8 @@ import java.util.Scanner;
  *
  */
 public class GameLogic {
+	
+	private static final Logger LOGGER = LogManager.getLogger(GameLogic.class);
 
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
@@ -31,18 +36,12 @@ public class GameLogic {
 	 */
 	public boolean gamePlay() {
 		int life = difficulty;
-		// int numberOfGuesses = 0;
 		String woord = chooseRandomWord();
 
 		char[] filler = new char[woord.length()];
 		int i = 0;
-		while (i < woord.length()) {
-			filler[i] = '-';
-			if (woord.charAt(i) == ' ') {
-				filler[i] = ' ';
-			}
-			i++;
-		}
+		
+		createEmptyDisplayString(woord, filler, i);
 
 		System.out.print(filler);
 		System.out.println("    life remaining = " + life);
@@ -84,6 +83,16 @@ public class GameLogic {
 		return wantToPlayAnotherGame();
 	}
 
+	private void createEmptyDisplayString(String woord, char[] filler, int i) {
+		while (i < woord.length()) {
+			filler[i] = '-';
+			if (woord.charAt(i) == ' ') {
+				filler[i] = ' ';
+			}
+			i++;
+		}
+	}
+
 	//TODO: validator toevoegen
 	private boolean wantToPlayAnotherGame() {
 		System.out.println("Do you want to play again? [1] = Yes [2] = No");
@@ -108,12 +117,7 @@ public class GameLogic {
 	 * @return the word which is selected.
 	 */
 	private String chooseRandomWord() {
-		int keyValue = selectRandomKey();
-		if (keyValue == 0) {
-			System.out.println("ERRORRR! Geen geldige waarde gevonden!");
-		}
-		return galgjeWoorden.get(keyValue);
-
+		return galgjeWoorden.get(selectRandomKey());
 	}
 
 	/**
@@ -130,7 +134,7 @@ public class GameLogic {
 			return random.nextInt((maxValue + 1 - 1) + 1) + 1;
 
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			LOGGER.error("Hangmang word cannot be selected based on key chosen. Error: {}", e);
 		}
 		return 0;
 	}
