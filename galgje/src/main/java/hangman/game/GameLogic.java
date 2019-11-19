@@ -34,8 +34,7 @@ public class GameLogic {
 	/**
 	 * This is the main game which will be played when choosing the game option.
 	 */
-	public boolean gamePlay() {
-		int life = difficulty;
+	public int gamePlay(int life) {
 		String woord = chooseRandomWord();
 
 		char[] filler = new char[woord.length()];
@@ -89,31 +88,26 @@ public class GameLogic {
 		return wantToPlayAnotherGame();
 	}
 
-
 	private int wantToPlayAnotherGame() {
-		System.out.println("Do you want to play again? [1] = Yes [2] = No [3] = Different word count");
-		int waarde = scanner.nextInt();
-
-		if (waarde < 0 || waarde > 3) {
-			System.out.println("Please enter a valid value. Either 1 (Yes), 2 (No) or 3.");
-		if(!isInputValid(input)) {
+		LOGGER.info("Do you want to play again? [1] = Yes [2] = No [3] = Different word count");
 		String input = scanner.next();
-		LOGGER.info("Do you want to play again? [1] = Yes [2] = No");
+		if (!isInputValid(input)) {
 			return wantToPlayAnotherGame();
 		}
-		return waarde;
+
+		return Integer.parseInt(input);
 	}
 
 	private boolean isInputValid(String input) {
-		if(!Validator.isNummeric(input)) {
+		if (!Validator.isNummeric(input)) {
 			LOGGER.info("Please enter a valid value. Either 1 (Yes) or 2 (No).");
 			return false;
 		}
-		if(Validator.inputIsGreaterThanHighestValue(input, 2)) {
-			LOGGER.info("Please enter a number lower than 2");
+		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
+			LOGGER.info("Please enter a number lower than 3");
 			return false;
 		}
-		if(Validator.inputIsSmallerThanSmallestValue(input, 1)) {
+		if (Validator.inputIsSmallerThanSmallestValue(input, 1)) {
 			LOGGER.info("Please enter a number higher than 1");
 			return false;
 		}

@@ -21,3 +21,7 @@
 [INFO ] 2019-11-19 14:07:20.312 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
 [INFO ] 2019-11-19 14:07:23.648 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
 [INFO ] 2019-11-19 14:07:26.753 [main] WordListReader - Wordlist is being loaded with the following name: 5_words_galgje.csv
+[INFO ] 2019-11-19 18:41:48.231 [main] MainApplication - Game is starting..
+[INFO ] 2019-11-19 18:41:53.043 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-19 18:42:31.151 [main] GameLogic - Do you want to play again? [1] = Yes [2] = No [3] = Different word count
+[INFO ] 2019-11-19 18:42:37.260 [main] MainApplication - Game is finished. The application is closable now.
