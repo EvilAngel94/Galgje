@@ -25,3 +25,42 @@
 [INFO ] 2019-11-19 18:41:53.043 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
 [INFO ] 2019-11-19 18:42:31.151 [main] GameLogic - Do you want to play again? [1] = Yes [2] = No [3] = Different word count
 [INFO ] 2019-11-19 18:42:37.260 [main] MainApplication - Game is finished. The application is closable now.
+[INFO ] 2019-11-19 18:45:58.508 [main] MainApplication - Game is starting..
+[INFO ] 2019-11-19 18:46:10.256 [main] WordListReader - Wordlist is being loaded with the following name: 5_words_galgje.csv
+[INFO ] 2019-11-19 18:46:13.550 [main] GameLogic - Do you want to play again? [1] = Yes [2] = No [3] = Different word count
+[INFO ] 2019-11-19 18:46:16.798 [main] MainApplication - Game is finished. The application is closable now.
+[ERROR] 2019-11-19 19:57:03.010 [main] PropertyReader - File is not found!. Path: {}
+java.io.FileNotFoundException: Application.properties (Het systeem kan het opgegeven bestand niet vinden)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_221]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_221]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_221]
+	at java.io.FileInputStream.<init>(FileInputStream.java:93) ~[?:1.8.0_221]
+	at java.io.FileReader.<init>(FileReader.java:58) ~[?:1.8.0_221]
+	at hangman.utils.PropertyReader.getInstance(PropertyReader.java:27) [classes/:?]
+	at utils.PropertyReaderTest.test(PropertyReaderTest.java:13) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_221]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_221]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_221]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_221]
+	at org.junit.internal.runners.TestMethodRunner.executeMethodBody(TestMethodRunner.java:99) [junit-4.1.jar:?]
+	at org.junit.internal.runners.TestMethodRunner.runUnprotected(TestMethodRunner.java:81) [junit-4.1.jar:?]
+	at org.junit.internal.runners.BeforeAndAfterRunner.runProtected(BeforeAndAfterRunner.java:34) [junit-4.1.jar:?]
+	at org.junit.internal.runners.TestMethodRunner.runMethod(TestMethodRunner.java:75) [junit-4.1.jar:?]
+	at org.junit.internal.runners.TestMethodRunner.run(TestMethodRunner.java:45) [junit-4.1.jar:?]
+	at org.junit.internal.runners.TestClassMethodsRunner.invokeTestMethod(TestClassMethodsRunner.java:71) [junit-4.1.jar:?]
+	at org.junit.internal.runners.TestClassMethodsRunner.run(TestClassMethodsRunner.java:35) [junit-4.1.jar:?]
+	at org.junit.internal.runners.TestClassRunner$1.runUnprotected(TestClassRunner.java:42) [junit-4.1.jar:?]
+	at org.junit.internal.runners.BeforeAndAfterRunner.runProtected(BeforeAndAfterRunner.java:34) [junit-4.1.jar:?]
+	at org.junit.internal.runners.TestClassRunner.run(TestClassRunner.java:52) [junit-4.1.jar:?]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:541) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:763) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:463) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:209) [.cp/:?]
+[INFO ] 2019-11-19 20:29:17.480 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-19 20:29:17.594 [main] WordListReader - Wordlist is being loaded with the following name: 5_words_galgje.csv
+[INFO ] 2019-11-19 20:29:35.993 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-19 20:29:52.582 [main] GameLogic - Do you want to play again? [1] = Yes [2] = No [3] = Different word count
+[INFO ] 2019-11-19 20:30:47.440 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-19 20:30:47.446 [main] WordListReader - Wordlist is being loaded with the following name: 5_words_galgje.csv

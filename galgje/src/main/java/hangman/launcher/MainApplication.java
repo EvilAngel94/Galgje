@@ -23,7 +23,7 @@ public class MainApplication {
 	}
 	
 	private void gameLoop() {
-		LOGGER.info("Game is starting..");
+		LOGGER.debug("Game is starting..");
 		boolean gameLoop;
 		
 		do {
@@ -31,7 +31,6 @@ public class MainApplication {
 			
 		} while (gameLoop);
 		
-		LOGGER.info("Game is finished. The application is closable now.");
-		System.out.println("Game is finished. You can close the application now.");
+		LOGGER.debug("Game is finished. The application is closable now.");
 	}
 }

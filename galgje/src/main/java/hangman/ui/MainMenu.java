@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import hangman.game.GameAssembler;
+import hangman.utils.PropertyReader;
 import hangman.utils.Validator;
 
 /**
@@ -14,88 +15,81 @@ import hangman.utils.Validator;
  * @author PolarBear Dev
  */
 public class MainMenu {
-	
+
 	private static final Logger LOGGER = LogManager.getLogger(MainMenu.class);
-	
-	private static final String START = "[1] start";
-	private static final String STOP = "[2] stop";
-	private static final String TAAL = "[3] taal";
 
 	private final Scanner scanner;
+	private boolean dutch = true;
 
 	public MainMenu(Scanner scanner) {
 		super();
 		this.scanner = scanner;
-		welcomeText();
+		PropertyReader.getInstance();
+		System.out.println(PropertyReader.getProperty("welcome.message", isDutch()));
 	}
 
 	public boolean mainMenu() {
 		boolean continueGame = true;
-		keuzeMenuText();
-		String keuze1 = "Het spel wordt nu opgestart";
-		String keuze2 = "Het spel wordt nu afgesloten";
-		String keuze3 = "Welke taal wil je de woorden?";
-		String keuzeOnbekend = "Sorry onjuiste code ingevoerd.. Probeer opnieuw";
+		System.out.println(PropertyReader.getProperty("mainmenu.menu.choices", isDutch()));
 
-		String input = scanner.next();
-		
-		if(!isInputValid(input)) {
+		String userInput = scanner.next();
+
+		if (!isInputValid(userInput)) {
 			mainMenu();
 		}
-		
-		int keuze = Integer.parseInt(input);
+		int keuze = Integer.parseInt(userInput);
 		switch (keuze) {
 
-		case 1:
-			System.out.println(keuze1);
-				
+		case 1: // Main gameplay
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.one", isDutch()));
+
 			GameAssembler assembler = new GameAssembler(scanner);
 			assembler.runGameLogic();
 
 			break;
 
-		case 2:
-			System.out.println(keuze2);
+		case 2: // Stop the game
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.two", isDutch()));
 			continueGame = false;
 			break;
 
-		case 3:
-			System.out.println(keuze3);
+		case 3: // Select a different language
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.three", isDutch()));
 			break;
-		
-		default:
-			System.out.println(keuzeOnbekend);
+
+		default: // Unknow choice
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.unknow", isDutch()));
 		}
-		
+
 		return continueGame;
 	}
 
 	private boolean isInputValid(String input) {
-		if(!Validator.isNummeric(input)){
+		if (!Validator.isNummeric(input)) {
 			System.out.println("Please enter a valid number.");
 			return false;
 		}
-		
-		if(Validator.inputIsSmallerThanSmallestValue(input, 1)){
+
+		if (Validator.inputIsSmallerThanSmallestValue(input, 1)) {
 			LOGGER.info("Input is smaller than smallest value. Input should be bigger than {}", 1);
 			System.out.println("Input is smaller than smallest value.");
 			return false;
 		}
-		
-		if(Validator.inputIsGreaterThanHighestValue(input, 3)) {
+
+		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
 			LOGGER.info("Input is greater than the higest value. Input should be smaller than {}", 3);
 			System.out.println("Input is invalid. Please provide a lower number");
 			return false;
 		}
 		return true;
-		
+
 	}
 
-	private void welcomeText() {
-		System.out.println("Welkom bij Galgje!");
+	public boolean isDutch() {
+		return dutch;
 	}
 
-	private void keuzeMenuText() {
-		System.out.printf("Je kan de volgende opties kiezen: %10s %10s %10s %n%n", START, STOP, TAAL);
+	public void setDutch(boolean isDutch) {
+		this.dutch = isDutch;
 	}
 }
