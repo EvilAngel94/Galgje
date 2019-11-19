@@ -16,13 +16,11 @@ public class GameAssembler {
 
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
-	private int difficulty;
 	
-	public GameAssembler(Scanner scanner, Map<Integer, String> galgjeWoorden, int difficulty) {
+	public GameAssembler(Scanner scanner, Map<Integer, String> galgjeWoorden) {
 		super();
 		this.scanner = scanner;
 		this.galgjeWoorden = galgjeWoorden;
-		this.difficulty = difficulty;
 	}
 
 	/**
@@ -31,11 +29,17 @@ public class GameAssembler {
 	public void runGameLogic() {
 		boolean returnToMainMenu;
 		
-		GameLogic gameLogic = new GameLogic(scanner, galgjeWoorden, difficulty);
+		GameLogic gameLogic = new GameLogic(scanner, galgjeWoorden);
 		do {
-			returnToMainMenu = gameLogic.gamePlay();
+			
+			int keuze = chooseDifficultyLevel();
+			returnToMainMenu = gameLogic.gamePlay(keuze);
 			
 		} while(returnToMainMenu);
+	}
+	
+	private int chooseDifficultyLevel() {
+		return new SelectDifficultyLevel(scanner).selectAmountOfLives();
 	}
 	
 }

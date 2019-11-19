@@ -22,20 +22,17 @@ public class GameLogic {
 
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
-	private int difficulty;
 
-	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden, int difficulty) {
+	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden) {
 		super();
 		this.scanner = scanner;
 		this.galgjeWoorden = galgjeWoorden;
-		this.difficulty = difficulty;
 	}
 
 	/**
 	 * This is the main game which will be played when choosing the game option.
 	 */
-	public boolean gamePlay() {
-		int life = difficulty;
+	public boolean gamePlay(int life) {
 		String woord = chooseRandomWord();
 
 		char[] filler = new char[woord.length()];

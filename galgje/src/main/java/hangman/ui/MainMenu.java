@@ -53,9 +53,8 @@ public class MainMenu {
 				System.out.println("Game is stoped, something went wrong while loading the words from the file.");
 				return false;
 			}
-			SelectDifficultyLevel difficultyLevel = new SelectDifficultyLevel(scanner);
-			int difficulty = difficultyLevel.selectAmountOfLives();
-			GameAssembler assembler = new GameAssembler(scanner, galgjeWoorden, difficulty);
+			
+			GameAssembler assembler = new GameAssembler(scanner, galgjeWoorden);
 			assembler.runGameLogic();
 
 			break;
