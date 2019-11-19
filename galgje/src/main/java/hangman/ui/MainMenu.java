@@ -1,11 +1,8 @@
 package hangman.ui;
 
-import java.io.IOException;
-import java.util.Map;
 import java.util.Scanner;
 
 import hangman.game.GameAssembler;
-import hangman.game.SelectDifficultyLevel;
 import hangman.utils.Validator;
 
 /**
@@ -19,7 +16,7 @@ public class MainMenu {
 	private static final String STOP = "[2] stop";
 	private static final String TAAL = "[3] taal";
 
-	private Scanner scanner;
+	private final Scanner scanner;
 
 	public MainMenu(Scanner scanner) {
 		super();
@@ -70,13 +67,4 @@ public class MainMenu {
 	private void keuzeMenuText() {
 		System.out.printf("Je kan de volgende opties kiezen: %10s %10s %10s %n%n", START, STOP, TAAL);
 	}
-
-	public Scanner getScanner() {
-		return scanner;
-	}
-
-	public void setScanner(Scanner scanner) {
-		this.scanner = scanner;
-	}
-
 }
