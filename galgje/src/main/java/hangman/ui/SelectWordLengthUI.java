@@ -28,10 +28,12 @@ public class SelectWordLengthUI {
 	public SelectWordLengthUI(Scanner scanner) {
 		super();
 		this.scanner = scanner;
-		uitlezen = new WordListReader();
 	}
 
 	public Map<Integer, String> loadWordList() throws IOException {
+		if (uitlezen == null) {
+			uitlezen = new WordListReader();
+		}
 
 		Map<Integer, String> galgjeWoorden = null;
 		System.out.println("Selecteer nu je woordenLengte [1] = 4, [2] = 5 letter woorden");

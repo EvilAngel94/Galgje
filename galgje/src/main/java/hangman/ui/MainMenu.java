@@ -1,14 +1,11 @@
 package hangman.ui;
 
-import java.io.IOException;
-import java.util.Map;
 import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import hangman.game.GameAssembler;
-import hangman.game.SelectDifficultyLevel;
 import hangman.utils.Validator;
 
 /**
@@ -24,7 +21,7 @@ public class MainMenu {
 	private static final String STOP = "[2] stop";
 	private static final String TAAL = "[3] taal";
 
-	private Scanner scanner;
+	private final Scanner scanner;
 
 	public MainMenu(Scanner scanner) {
 		super();
@@ -51,21 +48,8 @@ public class MainMenu {
 
 		case 1:
 			System.out.println(keuze1);
-			SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner);
-			Map<Integer, String> galgjeWoorden;
-			
-			try {
 				
-				galgjeWoorden = selectLengthGUI.loadWordList();
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println("Game is stoped, something went wrong while loading the words from the file.");
-				return false;
-			}
-			SelectDifficultyLevel difficultyLevel = new SelectDifficultyLevel(scanner);
-			int difficulty = difficultyLevel.selectAmountOfLives();
-			GameAssembler assembler = new GameAssembler(scanner, galgjeWoorden, difficulty);
+			GameAssembler assembler = new GameAssembler(scanner);
 			assembler.runGameLogic();
 
 			break;
@@ -114,13 +98,4 @@ public class MainMenu {
 	private void keuzeMenuText() {
 		System.out.printf("Je kan de volgende opties kiezen: %10s %10s %10s %n%n", START, STOP, TAAL);
 	}
-
-	public Scanner getScanner() {
-		return scanner;
-	}
-
-	public void setScanner(Scanner scanner) {
-		this.scanner = scanner;
-	}
-
 }
