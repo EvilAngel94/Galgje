@@ -32,7 +32,7 @@ public class GameLogic {
 	/**
 	 * This is the main game which will be played when choosing the game option.
 	 */
-	public boolean gamePlay(int life) {
+	public int gamePlay(int life) {
 		String woord = chooseRandomWord();
 
 		char[] filler = new char[woord.length()];
@@ -90,22 +90,15 @@ public class GameLogic {
 		}
 	}
 
-	//TODO: validator toevoegen
-	private boolean wantToPlayAnotherGame() {
-		System.out.println("Do you want to play again? [1] = Yes [2] = No");
+	private int wantToPlayAnotherGame() {
+		System.out.println("Do you want to play again? [1] = Yes [2] = No [3] = Different word count");
 		int waarde = scanner.nextInt();
 
-		if (waarde < 0 || waarde > 2) {
-			System.out.println("Please enter a valid value. Either 1 (Yes) or 2 (No).");
+		if (waarde < 0 || waarde > 3) {
+			System.out.println("Please enter a valid value. Either 1 (Yes), 2 (No) or 3.");
 			return wantToPlayAnotherGame();
 		}
-		if (waarde == 1) {
-			return true;
-		}
-		if (waarde == 2) {
-			return false;
-		}
-		return wantToPlayAnotherGame();
+		return waarde;
 	}
 
 	/**

@@ -41,20 +41,8 @@ public class MainMenu {
 
 		case 1:
 			System.out.println(keuze1);
-			SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner);
-			Map<Integer, String> galgjeWoorden;
-			
-			try {
 				
-				galgjeWoorden = selectLengthGUI.loadWordList();
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println("Game is stoped, something went wrong while loading the words from the file.");
-				return false;
-			}
-			
-			GameAssembler assembler = new GameAssembler(scanner, galgjeWoorden);
+			GameAssembler assembler = new GameAssembler(scanner);
 			assembler.runGameLogic();
 
 			break;

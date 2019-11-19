@@ -10,3 +10,14 @@
 [INFO ] 2019-11-19 13:20:42.939 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
 [INFO ] 2019-11-19 13:21:31.826 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
 [INFO ] 2019-11-19 13:21:33.575 [main] MainApplication - Game is finished. The application is closable now.
+[INFO ] 2019-11-19 14:05:25.991 [main] MainApplication - Game is starting..
+[INFO ] 2019-11-19 14:05:25.996 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
+[INFO ] 2019-11-19 14:05:28.014 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
+[INFO ] 2019-11-19 14:05:30.241 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-19 14:07:09.967 [main] MainApplication - Game is starting..
+[INFO ] 2019-11-19 14:07:09.972 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
+[INFO ] 2019-11-19 14:07:13.717 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
+[INFO ] 2019-11-19 14:07:15.295 [main] WordListReader - Wordlist is being loaded with the following name: 4_words_galgje.csv
+[INFO ] 2019-11-19 14:07:20.312 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
+[INFO ] 2019-11-19 14:07:23.648 [main] Validator - Validating the following input: SCANNER OBJECT.. with the following conditions: smallest 1, highestValue 2
+[INFO ] 2019-11-19 14:07:26.753 [main] WordListReader - Wordlist is being loaded with the following name: 5_words_galgje.csv
