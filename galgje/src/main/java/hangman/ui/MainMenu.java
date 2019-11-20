@@ -66,19 +66,19 @@ public class MainMenu {
 
 	private boolean isInputValid(String input) {
 		if (!Validator.isNummeric(input)) {
-			System.out.println("Please enter a valid number.");
+			System.out.println(PropertyReader.getProperty("validation.input.invalid", isDutch()));
 			return false;
 		}
 
 		if (Validator.inputIsSmallerThanSmallestValue(input, 1)) {
-			LOGGER.info("Input is smaller than smallest value. Input should be bigger than {}", 1);
-			System.out.println("Input is smaller than smallest value.");
+			LOGGER.debug("Input is smaller than smallest value. Input should be bigger than {}", 1);
+			System.out.println(PropertyReader.getProperty("validation.input.toosmall", isDutch()));
 			return false;
 		}
 
 		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
-			LOGGER.info("Input is greater than the higest value. Input should be smaller than {}", 3);
-			System.out.println("Input is invalid. Please provide a lower number");
+			LOGGER.debug("Input is greater than the higest value. Input should be smaller than {}", 3);
+			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch()));
 			return false;
 		}
 		return true;
@@ -89,7 +89,4 @@ public class MainMenu {
 		return dutch;
 	}
 
-	public void setDutch(boolean isDutch) {
-		this.dutch = isDutch;
-	}
 }
