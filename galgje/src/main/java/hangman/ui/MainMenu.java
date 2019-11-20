@@ -43,7 +43,7 @@ public class MainMenu {
 		case 1: // Main gameplay
 			System.out.println(PropertyReader.getProperty("mainmenu.choice.one", isDutch()));
 
-			GameAssembler assembler = new GameAssembler(scanner);
+			GameAssembler assembler = new GameAssembler(scanner, isDutch());
 			assembler.runGameLogic();
 
 			break;

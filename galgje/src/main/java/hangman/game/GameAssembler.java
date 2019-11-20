@@ -25,10 +25,13 @@ public class GameAssembler {
 	private static final Logger LOGGER = LogManager.getLogger(GameAssembler.class);
 
 	private final Scanner scanner;
+	
+	private boolean isDutch;
 
-	public GameAssembler(Scanner scanner) {
+	public GameAssembler(Scanner scanner, boolean isDutch) {
 		super();
 		this.scanner = scanner;
+		this.isDutch = isDutch;
 	}
 
 	/**
@@ -55,7 +58,7 @@ public class GameAssembler {
 
 	private Map<Integer, String> retreiveHangmanWords() {
 
-		SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner);
+		SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner, isDutch);
 		Map<Integer, String> hangmanWords = new HashMap<>();
 
 		try {
