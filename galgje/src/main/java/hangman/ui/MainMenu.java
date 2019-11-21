@@ -19,18 +19,18 @@ public class MainMenu {
 	private static final Logger LOGGER = LogManager.getLogger(MainMenu.class);
 
 	private final Scanner scanner;
-	private boolean dutch = true;
+	private boolean isDutch;
 
 	public MainMenu(Scanner scanner) {
 		super();
 		this.scanner = scanner;
+		this.isDutch = true;
 		PropertyReader.getInstance();
-		System.out.println(PropertyReader.getProperty("welcome.message", isDutch()));
 	}
 
 	public boolean mainMenu() {
 		boolean continueGame = true;
-		System.out.println(PropertyReader.getProperty("mainmenu.menu.choices", isDutch()));
+		System.out.println(PropertyReader.getProperty("mainmenu.menu.choices", isDutch));
 
 		String userInput = scanner.next();
 
@@ -41,52 +41,76 @@ public class MainMenu {
 		switch (keuze) {
 
 		case 1: // Main gameplay
-			System.out.println(PropertyReader.getProperty("mainmenu.choice.one", isDutch()));
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.one", isDutch));
 
-			GameAssembler assembler = new GameAssembler(scanner, isDutch());
+			GameAssembler assembler = new GameAssembler(scanner, isDutch);
 			assembler.runGameLogic();
 
 			break;
 
 		case 2: // Stop the game
-			System.out.println(PropertyReader.getProperty("mainmenu.choice.two", isDutch()));
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.two", isDutch));
 			continueGame = false;
 			break;
 
 		case 3: // Select a different language
-			System.out.println(PropertyReader.getProperty("mainmenu.choice.three", isDutch()));
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.three", isDutch));
+
+			userInput = scanner.next();
+
+			if (!isInputValid(userInput)) {
+				mainMenu();
+			}
+
+			selectLanguage(Integer.parseInt(userInput));
 			break;
 
 		default: // Unknow choice
-			System.out.println(PropertyReader.getProperty("mainmenu.choice.unknow", isDutch()));
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.unknow", isDutch));
 		}
 
 		return continueGame;
 	}
 
+	private void selectLanguage(int userInput) {
+		if (userInput == 1) {
+			setIsDutch(true);
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.three.changed", isDutch));
+		}
+		if (userInput == 2) {
+			setIsDutch(false);
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.three.changed", isDutch));
+		}
+		if (userInput < 1 || userInput > 2) {
+			System.out.println(PropertyReader.getProperty("validation.input.invalid", isDutch));
+		}
+	}
+
 	private boolean isInputValid(String input) {
 		if (!Validator.isNummeric(input)) {
-			System.out.println(PropertyReader.getProperty("validation.input.invalid", isDutch()));
+			System.out.println(PropertyReader.getProperty("validation.input.invalid", isDutch));
 			return false;
 		}
 
 		if (Validator.inputIsSmallerThanSmallestValue(input, 1)) {
 			LOGGER.debug("Input is smaller than smallest value. Input should be bigger than {}", 1);
-			System.out.println(PropertyReader.getProperty("validation.input.toosmall", isDutch()));
+			System.out.println(PropertyReader.getProperty("validation.input.toosmall", isDutch));
 			return false;
 		}
 
 		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
 			LOGGER.debug("Input is greater than the higest value. Input should be smaller than {}", 3);
-			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch()));
+			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch));
 			return false;
 		}
 		return true;
 
 	}
 
-	public boolean isDutch() {
-		return dutch;
+	// can only be used within this class.
+	private void setIsDutch(boolean isDutch) {
+		this.isDutch = isDutch;
+
 	}
 
 }

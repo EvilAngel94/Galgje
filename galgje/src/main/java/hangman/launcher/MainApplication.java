@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import hangman.ui.MainMenu;
+import hangman.utils.PropertyReader;
 
 public class MainApplication {
 	
@@ -16,6 +17,8 @@ public class MainApplication {
 	public MainApplication() {
 		super();
 		this.scanner = new Scanner(System.in);
+		PropertyReader.getInstance();
+		System.out.println(PropertyReader.getProperty("welcome.message", true));
 	}
 	
 	public static void main(String[] args) {
@@ -26,8 +29,10 @@ public class MainApplication {
 		LOGGER.debug("Game is starting..");
 		boolean gameLoop;
 		
+		MainMenu mainMenu = new MainMenu(scanner);
+		
 		do {
-			gameLoop = new MainMenu(scanner).mainMenu();
+			gameLoop = mainMenu.mainMenu();
 			
 		} while (gameLoop);
 		
