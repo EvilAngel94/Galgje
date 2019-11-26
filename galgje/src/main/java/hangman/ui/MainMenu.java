@@ -25,6 +25,7 @@ public class MainMenu {
 		super();
 		this.scanner = scanner;
 		this.isDutch = true;
+		
 		PropertyReader.getInstance();
 	}
 
@@ -37,15 +38,15 @@ public class MainMenu {
 		if (!isInputValid(userInput)) {
 			mainMenu();
 		}
+		
 		int keuze = Integer.parseInt(userInput);
+	
 		switch (keuze) {
-
 		case 1: // Main gameplay
 			System.out.println(PropertyReader.getProperty("mainmenu.choice.one", isDutch));
 
 			GameAssembler assembler = new GameAssembler(scanner, isDutch);
 			assembler.runGameLogic();
-
 			break;
 
 		case 2: // Stop the game
@@ -107,10 +108,12 @@ public class MainMenu {
 
 	}
 
-	// can only be used within this class.
+	/*
+	 * This setter is only used to set a different language. 
+	 * At this moment, only Dutch or English can be played.
+	 */
 	private void setIsDutch(boolean isDutch) {
 		this.isDutch = isDutch;
-
 	}
 
 }

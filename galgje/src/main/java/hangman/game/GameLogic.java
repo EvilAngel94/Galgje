@@ -10,6 +10,7 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import hangman.utils.PropertyReader;
 import hangman.utils.Validator;
 
 /**
@@ -24,11 +25,15 @@ public class GameLogic {
 
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
+	private boolean isDutch;
 
-	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden) {
+	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden, boolean isDutch) {
 		super();
 		this.scanner = scanner;
 		this.galgjeWoorden = galgjeWoorden;
+		this.isDutch = isDutch;
+		
+		PropertyReader.getInstance();
 	}
 
 	/**
@@ -91,7 +96,7 @@ public class GameLogic {
 	}
 
 	private int wantToPlayAnotherGame() {
-		LOGGER.debug("Do you want to play again? [1] = Yes [2] = No [3] = Different word count");
+		System.out.println(PropertyReader.getProperty("game.another", isDutch));
 		String input = scanner.next();
 		if (!isInputValid(input)) {
 			return wantToPlayAnotherGame();
@@ -102,21 +107,25 @@ public class GameLogic {
 
 	private boolean isInputValid(String input) {
 		if (!Validator.isNummeric(input)) {
-			LOGGER.debug("Please enter a valid value. Either 1 (Yes) or 2 (No).");
+			System.out.println(PropertyReader.getProperty("validation.input.invalid", isDutch));
 			return false;
 		}
-		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
-			LOGGER.debug("Please enter a number lower than 3");
-			return false;
-		}
+
 		if (Validator.inputIsSmallerThanSmallestValue(input, 1)) {
-			LOGGER.debug("Please enter a number higher than 1");
+			LOGGER.debug("Input is smaller than smallest value. Input should be bigger than {}", 1);
+			System.out.println(PropertyReader.getProperty("validation.input.toosmall", isDutch));
+			return false;
+		}
+
+		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
+			LOGGER.debug("Input is greater than the higest value. Input should be smaller than {}", 3);
+			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch));
 			return false;
 		}
 		return true;
 	}
 
-	/**
+	/*
 	 * Select a random word from the HashMap.
 	 * 
 	 * @return the word which is selected.
@@ -125,7 +134,7 @@ public class GameLogic {
 		return galgjeWoorden.get(selectRandomKey());
 	}
 
-	/**
+	/*
 	 * This method generates a random number. The number which is randomly generated
 	 * is used to pick the corresponding word.
 	 * 

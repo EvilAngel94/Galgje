@@ -42,7 +42,7 @@ public class GameAssembler {
 	public void runGameLogic() {
 		int returnToMainMenu = 0;
 
-		GameLogic gameLogic = new GameLogic(scanner, retreiveHangmanWords());
+		GameLogic gameLogic = new GameLogic(scanner, retreiveHangmanWords(), isDutch);
 		
 		do {
 
