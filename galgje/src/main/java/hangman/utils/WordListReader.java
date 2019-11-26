@@ -12,19 +12,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Deze klasse leest de woorden uit van het {@link galgje_woorden_lijst}
- * resources.
+ * This class is responsible for reading the selected word list. And putting the
+ * found values in a Map instance. The key is the place in the file, String is
+ * the word corresponding with the key.
  * 
- * Aan de hand van de keuze die de speler maakt word de juiste woordenlijst
- * geladen.
- * 
- * The following 2 classes are used to read the file.
- * {@link https://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html}
- * {@link https://docs.oracle.com/javase/8/docs/api/java/io/FileReader.html}
+ * @author PolarBear Dev
  *
  */
 public class WordListReader {
-	
+
 	private static final Logger LOGGER = LogManager.getLogger(WordListReader.class);
 
 	private Map<Integer, String> hangmanWords;
@@ -35,7 +31,8 @@ public class WordListReader {
 	}
 
 	/**
-	 * The wordt list is being read read here. All the found words are put in a map, based on their number and word.
+	 * The word list is being read read here. All the found words are put in a map,
+	 * based on their number and word.
 	 * 
 	 * @param wordlist
 	 * 
@@ -44,18 +41,17 @@ public class WordListReader {
 	 * @throws IOException
 	 */
 	public Map<Integer, String> readsSelectedCSVFile(String wordlist) throws IOException {
-		LOGGER.info("Wordlist is being loaded with the following name: {}", wordlist);
-		//this refers to this class.
+		LOGGER.debug("Wordlist is being loaded with the following name: {}", wordlist);
+		// this refers to this class.
 		InputStream inputStream = this.getClass().getResourceAsStream("/hangman_word_list/" + wordlist);
 		InputStreamReader inputReader = new InputStreamReader(inputStream);
-		
-		
-		try (BufferedReader reader = new BufferedReader(inputReader)){
+
+		try (BufferedReader reader = new BufferedReader(inputReader)) {
 
 			String seperator = ",";
-			
-			//first line should be ignored, that's why the value is not used
-			String line = reader.readLine(); 
+
+			// first line should be ignored, that's why the value is not used
+			String line = reader.readLine();
 
 			// This checks if the reader has a next line.
 			while ((line = reader.readLine()) != null) {
@@ -67,9 +63,10 @@ public class WordListReader {
 				hangmanWords.put(id, word);
 			}
 		} catch (FileNotFoundException e) {
-			LOGGER.error("File with name {} cannot be found! Make sure the name is spelled correctly. error: {}", wordlist, e);
+			LOGGER.error("File with name {} cannot be found! Make sure the name is spelled correctly. error: {}",
+					wordlist, e);
 		}
-		
+
 		return hangmanWords;
 	}
 }

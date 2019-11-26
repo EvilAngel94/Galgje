@@ -8,6 +8,7 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import hangman.ui.SelectDifficultyLevelUI;
 import hangman.ui.SelectWordLengthUI;
 
 /**
@@ -25,10 +26,13 @@ public class GameAssembler {
 	private static final Logger LOGGER = LogManager.getLogger(GameAssembler.class);
 
 	private final Scanner scanner;
+	
+	private boolean isDutch;
 
-	public GameAssembler(Scanner scanner) {
+	public GameAssembler(Scanner scanner, boolean isDutch) {
 		super();
 		this.scanner = scanner;
+		this.isDutch = isDutch;
 	}
 
 	/**
@@ -39,9 +43,13 @@ public class GameAssembler {
 	public void runGameLogic() {
 		int returnToMainMenu = 0;
 
-		GameLogic gameLogic = new GameLogic(scanner, retreiveHangmanWords());
+		GameLogic gameLogic = new GameLogic(scanner, retreiveHangmanWords(), isDutch);
 		
 		do {
+			
+			if(returnToMainMenu == 3) {
+				gameLogic = new GameLogic(scanner, retreiveHangmanWords(), isDutch);
+			}
 
 			int keuze = chooseDifficultyLevel();
 			returnToMainMenu = gameLogic.gamePlay(keuze);
@@ -50,12 +58,12 @@ public class GameAssembler {
 	}
 
 	private int chooseDifficultyLevel() {
-		return new SelectDifficultyLevel(scanner).selectAmountOfLives();
+		return new SelectDifficultyLevelUI(scanner, isDutch).selectAmountOfLives();
 	}
 
 	private Map<Integer, String> retreiveHangmanWords() {
 
-		SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner);
+		SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner, isDutch);
 		Map<Integer, String> hangmanWords = new HashMap<>();
 
 		try {

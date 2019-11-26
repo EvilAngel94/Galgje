@@ -10,6 +10,7 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import hangman.utils.PropertyReader;
 import hangman.utils.Validator;
 
 /**
@@ -24,11 +25,15 @@ public class GameLogic {
 
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
+	private boolean isDutch;
 
-	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden) {
+	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden, boolean isDutch) {
 		super();
 		this.scanner = scanner;
 		this.galgjeWoorden = galgjeWoorden;
+		this.isDutch = isDutch;
+		
+		PropertyReader.getInstance();
 	}
 
 	/**
@@ -37,30 +42,19 @@ public class GameLogic {
 	public int gamePlay(int life) {
 		String woord = chooseRandomWord();
 
-		char[] filler = new char[woord.length()];
-
-		int i = 0;
-		while (i < woord.length()) {
-			filler[i] = '-';
-			if (woord.charAt(i) == ' ') {
-				filler[i] = ' ';
-			}
-			i++;
-		}
-
-		System.out.print(filler);
-		System.out.println("    life remaining = " + life);
-		ArrayList<Character> list = new ArrayList<>();
-
+		char[] filler = createEmptyPlayableLine(woord);
+		System.out.println(String.valueOf(filler) +" life remaining = " + life);
+		
+		ArrayList<Character> alreadyChosenOptions = new ArrayList<>();
 		while (life > 0) { // gaat door zolang het kan.
 			char x = scanner.next().charAt(0); // Controle puur op eerste imput
 
-			if (list.contains(x)) {
+			if (alreadyChosenOptions.contains(x)) {
 				System.out.println("You've already enterd: " + x);
 				continue;
 			}
 
-			list.add(x);
+			alreadyChosenOptions.add(x);
 			if (woord.contains(x + "")) {
 				for (int y = 0; y < woord.length(); y++) {
 					if (woord.charAt(y) == x) { // checks the character and will replace '-' by the character.
@@ -88,8 +82,21 @@ public class GameLogic {
 		return wantToPlayAnotherGame();
 	}
 
+	private char[] createEmptyPlayableLine(String woord) {
+		char[] filler = new char[woord.length()];
+		int i = 0;
+		while (i < woord.length()) {
+			filler[i] = '-';
+			if (woord.charAt(i) == ' ') {
+				filler[i] = ' ';
+			}
+			i++;
+		}
+		return filler;
+	}
+
 	private int wantToPlayAnotherGame() {
-		LOGGER.info("Do you want to play again? [1] = Yes [2] = No [3] = Different word count");
+		System.out.println(PropertyReader.getProperty("game.another", isDutch));
 		String input = scanner.next();
 		if (!isInputValid(input)) {
 			return wantToPlayAnotherGame();
@@ -100,21 +107,25 @@ public class GameLogic {
 
 	private boolean isInputValid(String input) {
 		if (!Validator.isNummeric(input)) {
-			LOGGER.info("Please enter a valid value. Either 1 (Yes) or 2 (No).");
+			System.out.println(PropertyReader.getProperty("validation.input.invalid", isDutch));
 			return false;
 		}
-		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
-			LOGGER.info("Please enter a number lower than 3");
-			return false;
-		}
+
 		if (Validator.inputIsSmallerThanSmallestValue(input, 1)) {
-			LOGGER.info("Please enter a number higher than 1");
+			LOGGER.debug("Input is smaller than smallest value. Input should be bigger than {}", 1);
+			System.out.println(PropertyReader.getProperty("validation.input.toosmall", isDutch));
+			return false;
+		}
+
+		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
+			LOGGER.debug("Input is greater than the higest value. Input should be smaller than {}", 3);
+			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch));
 			return false;
 		}
 		return true;
 	}
 
-	/**
+	/*
 	 * Select a random word from the HashMap.
 	 * 
 	 * @return the word which is selected.
@@ -123,7 +134,7 @@ public class GameLogic {
 		return galgjeWoorden.get(selectRandomKey());
 	}
 
-	/**
+	/*
 	 * This method generates a random number. The number which is randomly generated
 	 * is used to pick the corresponding word.
 	 * 
