@@ -45,6 +45,10 @@ public class GameAssembler {
 		GameLogic gameLogic = new GameLogic(scanner, retreiveHangmanWords(), isDutch);
 		
 		do {
+			
+			if(returnToMainMenu == 3) {
+				gameLogic = new GameLogic(scanner, retreiveHangmanWords(), isDutch);
+			}
 
 			int keuze = chooseDifficultyLevel();
 			returnToMainMenu = gameLogic.gamePlay(keuze);
