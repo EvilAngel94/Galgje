@@ -41,7 +41,7 @@
 
 	<!-- Build of the project -->
 	<build>
-		<finalName>portfolio</finalName>
+		<finalName>Hangman</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
