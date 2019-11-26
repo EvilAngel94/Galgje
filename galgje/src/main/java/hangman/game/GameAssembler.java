@@ -8,6 +8,7 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import hangman.ui.SelectDifficultyLevelUI;
 import hangman.ui.SelectWordLengthUI;
 
 /**
@@ -57,7 +58,7 @@ public class GameAssembler {
 	}
 
 	private int chooseDifficultyLevel() {
-		return new SelectDifficultyLevel(scanner).selectAmountOfLives();
+		return new SelectDifficultyLevelUI(scanner, isDutch).selectAmountOfLives();
 	}
 
 	private Map<Integer, String> retreiveHangmanWords() {
