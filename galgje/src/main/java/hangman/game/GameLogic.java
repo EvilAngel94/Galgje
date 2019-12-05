@@ -32,7 +32,7 @@ public class GameLogic {
 		this.scanner = scanner;
 		this.galgjeWoorden = galgjeWoorden;
 		this.isDutch = isDutch;
-		
+
 		PropertyReader.getInstance();
 	}
 
@@ -43,27 +43,21 @@ public class GameLogic {
 		String woord = chooseRandomWord();
 
 		char[] filler = createEmptyPlayableLine(woord);
-		System.out.println(String.valueOf(filler) +" life remaining = " + life);
-		
-		ArrayList<Character> alreadyChosenOptions = new ArrayList<>();
-		while (life > 0) { // gaat door zolang het kan.
-			char x = scanner.next().charAt(0); // Controle puur op eerste imput
+		System.out.println(String.valueOf(filler) + " life remaining = " + life);
 
-			if (alreadyChosenOptions.contains(x)) {
-				System.out.println("You've already enterd: " + x);
+		ArrayList<Character> alreadyChosenOptions = new ArrayList<>();
+
+		while (life > 0) { // gaat door zolang het kan.
+			char inputOfUser = scanner.next().charAt(0); // Controle puur op eerste imput
+
+			if (alreadyChosenOptions.contains(inputOfUser)) {
+				System.out.println("You've already enterd: " + inputOfUser);
 				continue;
 			}
 
-			alreadyChosenOptions.add(x);
-			if (woord.contains(x + "")) {
-				for (int y = 0; y < woord.length(); y++) {
-					if (woord.charAt(y) == x) { // checks the character and will replace '-' by the character.
-						filler[y] = x;
-					}
-				}
-			} else {
-				life--; // Gaat leven eraf
-			}
+			alreadyChosenOptions.add(inputOfUser);
+			life = checkIfWordContainsInputCharacter(life, woord, filler, inputOfUser);
+
 			if (woord.equals(String.valueOf(filler))) {
 				System.out.println(filler);
 				System.out.println("You won!");
@@ -82,15 +76,29 @@ public class GameLogic {
 		return wantToPlayAnotherGame();
 	}
 
+	private int checkIfWordContainsInputCharacter(int life, String woord, char[] filler, char inputOfUser) {
+		if (woord.contains(inputOfUser + "")) {
+			for (int letterInWord = 0; letterInWord < woord.length(); letterInWord++) {
+				// checks the character and will replace '-' by the character.
+				if (woord.charAt(letterInWord) == inputOfUser) { 
+					filler[letterInWord] = inputOfUser;
+				}
+			}
+		} else {
+			life--; // Gaat leven eraf
+		}
+		return life;
+	}
+
 	private char[] createEmptyPlayableLine(String woord) {
 		char[] filler = new char[woord.length()];
-		int i = 0;
-		while (i < woord.length()) {
-			filler[i] = '-';
-			if (woord.charAt(i) == ' ') {
-				filler[i] = ' ';
+		int index = 0;
+		while (index < woord.length()) {
+			filler[index] = '-';
+			if (woord.charAt(index) == ' ') {
+				filler[index] = ' ';
 			}
-			i++;
+			index++;
 		}
 		return filler;
 	}
