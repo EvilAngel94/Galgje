@@ -46,7 +46,7 @@ public class MainMenu {
 			System.out.println(PropertyReader.getProperty("mainmenu.choice.one", isDutch));
 
 			GameAssembler assembler = new GameAssembler(scanner, isDutch);
-			assembler.runGameLogic();
+			assembler.runGameLoop();
 			break;
 
 		case 2: // Stop the game

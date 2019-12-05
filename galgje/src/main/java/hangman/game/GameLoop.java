@@ -14,20 +14,20 @@ import hangman.utils.PropertyReader;
 import hangman.utils.Validator;
 
 /**
- * This class contains the Game logic
+ * This class is responsible for the main game loop.
  * 
  * @author Polar Bear Development.
  *
  */
-public class GameLogic {
+public class GameLoop {
 
-	private static final Logger LOGGER = LogManager.getLogger(GameLogic.class);
+	private static final Logger LOGGER = LogManager.getLogger(GameLoop.class);
 
 	private Scanner scanner;
 	private Map<Integer, String> galgjeWoorden;
 	private boolean isDutch;
 
-	public GameLogic(Scanner scanner, Map<Integer, String> galgjeWoorden, boolean isDutch) {
+	public GameLoop(Scanner scanner, Map<Integer, String> galgjeWoorden, boolean isDutch) {
 		super();
 		this.scanner = scanner;
 		this.galgjeWoorden = galgjeWoorden;
@@ -39,16 +39,17 @@ public class GameLogic {
 	/**
 	 * This is the main game which will be played when choosing the game option.
 	 */
-	public int gamePlay(int life) {
-		String woord = chooseRandomWord();
+	public int mainGameLoop(int life) {
+		String word = chooseRandomWord();
 
-		char[] filler = createEmptyPlayableLine(woord);
+		char[] filler = createEmptyPlayableLine(word);
 		System.out.println(String.valueOf(filler) + " life remaining = " + life);
 
 		ArrayList<Character> alreadyChosenOptions = new ArrayList<>();
 
-		while (life > 0) { // gaat door zolang het kan.
-			char inputOfUser = scanner.next().charAt(0); // Controle puur op eerste imput
+		// While the player has lives left, the main gameloop will run.
+		while (life > 0) { 
+			char inputOfUser = scanner.next().charAt(0);
 
 			if (alreadyChosenOptions.contains(inputOfUser)) {
 				System.out.println("You've already enterd: " + inputOfUser);
@@ -56,31 +57,29 @@ public class GameLogic {
 			}
 
 			alreadyChosenOptions.add(inputOfUser);
-			life = checkIfWordContainsInputCharacter(life, woord, filler, inputOfUser);
+			life = checkIfWordContainsInputCharacter(life, word, filler, inputOfUser);
 
-			if (woord.equals(String.valueOf(filler))) {
-				System.out.println(filler);
-				System.out.println("You won!");
-				break;
+			if (word.equals(String.valueOf(filler))) {
+				System.out.println(String.valueOf(filler) + "\nYou won!");
+				return wantToPlayAnotherGame();
 			}
 
-			System.out.print(filler);
-			System.out.println("    life remaining = " + life);
+			System.out.println(String.valueOf(filler) + " life remaining = " + life);
 		}
 
 		if (life == 0) {
-			System.out.println(woord);
-			System.out.println("You lost");
+			System.out.println("The correct word was: " + word + "\nYou lost");
 		}
 
 		return wantToPlayAnotherGame();
 	}
 
 	private int checkIfWordContainsInputCharacter(int life, String woord, char[] filler, char inputOfUser) {
+
 		if (woord.contains(inputOfUser + "")) {
 			for (int letterInWord = 0; letterInWord < woord.length(); letterInWord++) {
 				// checks the character and will replace '-' by the character.
-				if (woord.charAt(letterInWord) == inputOfUser) { 
+				if (woord.charAt(letterInWord) == inputOfUser) {
 					filler[letterInWord] = inputOfUser;
 				}
 			}
@@ -90,47 +89,33 @@ public class GameLogic {
 		return life;
 	}
 
+	/*
+	 * Creates the first representation of the word. Meaning, the length of the word will be converted to '-' characters.
+	 */
 	private char[] createEmptyPlayableLine(String woord) {
 		char[] filler = new char[woord.length()];
 		int index = 0;
 		while (index < woord.length()) {
 			filler[index] = '-';
+			// When a space is present in the word, it will be displayed as space. Not as '-'.
 			if (woord.charAt(index) == ' ') {
 				filler[index] = ' ';
 			}
 			index++;
 		}
+		
 		return filler;
 	}
 
 	private int wantToPlayAnotherGame() {
 		System.out.println(PropertyReader.getProperty("game.another", isDutch));
 		String input = scanner.next();
+		
 		if (!isInputValid(input)) {
 			return wantToPlayAnotherGame();
 		}
 
 		return Integer.parseInt(input);
-	}
-
-	private boolean isInputValid(String input) {
-		if (!Validator.isNummeric(input)) {
-			System.out.println(PropertyReader.getProperty("validation.input.invalid", isDutch));
-			return false;
-		}
-
-		if (Validator.inputIsSmallerThanSmallestValue(input, 1)) {
-			LOGGER.debug("Input is smaller than smallest value. Input should be bigger than {}", 1);
-			System.out.println(PropertyReader.getProperty("validation.input.toosmall", isDutch));
-			return false;
-		}
-
-		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
-			LOGGER.debug("Input is greater than the higest value. Input should be smaller than {}", 3);
-			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch));
-			return false;
-		}
-		return true;
 	}
 
 	/*
@@ -158,6 +143,28 @@ public class GameLogic {
 		} catch (NoSuchAlgorithmException e) {
 			LOGGER.error("Hangmang word cannot be selected based on key chosen. Error: {}", e);
 		}
+		
 		return 0;
+	}
+	
+	private boolean isInputValid(String input) {
+		if (!Validator.isNummeric(input)) {
+			System.out.println(PropertyReader.getProperty("validation.input.invalid", isDutch));
+			return false;
+		}
+
+		if (Validator.inputIsSmallerThanSmallestValue(input, 1)) {
+			LOGGER.debug("Input is smaller than smallest value. Input should be bigger than {}", 1);
+			System.out.println(PropertyReader.getProperty("validation.input.toosmall", isDutch));
+			return false;
+		}
+
+		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
+			LOGGER.debug("Input is greater than the higest value. Input should be smaller than {}", 3);
+			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch));
+			return false;
+		}
+		
+		return true;
 	}
 }
