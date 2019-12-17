@@ -6,7 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import hangman.game.GameAssembler;
+import hangman.game.save.UserData;
 import hangman.utils.PropertyReader;
+import hangman.utils.ReadUserDataToXml;
 import hangman.utils.Validator;
 
 /**
@@ -65,6 +67,14 @@ public class MainMenu {
 
 			selectLanguage(Integer.parseInt(userInput));
 			break;
+			
+		case 4: // View player stats
+			System.out.println(PropertyReader.getProperty("mainmenu.choice.four", isDutch));
+			
+			UserData userData = ReadUserDataToXml.readData(false);
+			System.out.println(userData.toString());
+			
+			break;
 
 		default: // Unknow choice
 			System.out.println(PropertyReader.getProperty("mainmenu.choice.unknow", isDutch));
@@ -99,8 +109,8 @@ public class MainMenu {
 			return false;
 		}
 
-		if (Validator.inputIsGreaterThanHighestValue(input, 3)) {
-			LOGGER.debug("Input is greater than the higest value. Input should be smaller than {}", 3);
+		if (Validator.inputIsGreaterThanHighestValue(input, 4)) {
+			LOGGER.debug("Input is greater than the higest value. Input should be smaller than {}", 4);
 			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch));
 			return false;
 		}
