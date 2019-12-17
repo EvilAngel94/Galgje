@@ -56,6 +56,12 @@ public class UserData {
 	public void setLivesUsed(int livesUsed) {
 		this.livesUsed = livesUsed;
 	}
+	
+	@Override
+	public String toString() {
+		return "UserData [gamesPlayed=" + gamesPlayed + ", wordsSolved=" + wordsSolved + ", livesUsed=" + livesUsed
+				+ "]";
+	}
 
 	public boolean isValid() {
 		if(gamesPlayed < 0) {

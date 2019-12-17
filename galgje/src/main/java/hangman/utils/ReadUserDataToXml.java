@@ -1,16 +1,54 @@
 package hangman.utils;
 
+import java.io.File;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import hangman.game.save.UserData;
 
-public class ReadUserData {
-	
-	private UserData userData;
-	
-	public ReadUserData(UserData userData) {
+/**
+ * This class is responsible for reading the xml file and put the values found
+ * to the correct fields of the {@link UserData}
+ */
+public class ReadUserDataToXml {
+
+	private static final Logger LOGGER = LogManager.getLogger(ReadUserDataToXml.class);
+
+	private ReadUserDataToXml() {
 		super();
-		this.userData = userData;	
 	}
-	
-	
+
+	public static UserData readData(boolean unittest) {
+		File xmlFile;
+		
+		if (unittest) {
+			LOGGER.debug("Unittest is active..");
+			xmlFile = new File("userDataUnitTest.xml");
+		} else {
+			LOGGER.debug("Reading data from userData.xml..");
+			xmlFile = new File("userData.xml");
+		}
+		
+		JAXBContext jaxbContext;
+		UserData userDataFromFile = null;
+
+		try {
+			jaxbContext = JAXBContext.newInstance(UserData.class);
+
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			userDataFromFile = (UserData) jaxbUnmarshaller.unmarshal(xmlFile);
+
+		} catch (JAXBException ex) {
+			LOGGER.debug("Error reading xml file of Userdata. {}", ex);
+		}
+		LOGGER.debug("Succesfull reading data from xml file.");
+		return userDataFromFile;
+	}
 
 }

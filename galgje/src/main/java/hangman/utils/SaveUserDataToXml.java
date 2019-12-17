@@ -26,7 +26,7 @@ public class SaveUserDataToXml {
 	 * 
 	 * @return true if succesfull otherwise false.
 	 */
-	public boolean saveData() {
+	public boolean saveData(boolean unittest) {
 
 		if (!userData.isValid()) {
 			LOGGER.debug("UserData does not have valid values! {}", userData.toString());
@@ -43,9 +43,14 @@ public class SaveUserDataToXml {
 			// Required formatting??
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
+			File file;
 			// Store XML to File
-			File file = new File("userData.xml");
-
+			if(unittest) {
+				file = new File("userDataUnitTest.xml");
+			}else {
+				file = new File("userData.xml");
+			}
+			
 			// Writes XML file to file-system
 			jaxbMarshaller.marshal(userData, file);
 			return true;
