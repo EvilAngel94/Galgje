@@ -10,7 +10,9 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import hangman.game.save.UserData;
 import hangman.utils.PropertyReader;
+import hangman.utils.SaveUserDataToXml;
 import hangman.utils.Validator;
 
 /**
@@ -41,6 +43,7 @@ public class GameLoop {
 	 */
 	public int mainGameLoop(int life) {
 		String word = chooseRandomWord();
+		int startLives = life;
 
 		char[] filler = createEmptyPlayableLine(word);
 		System.out.println(String.valueOf(filler) + " life remaining = " + life);
@@ -61,7 +64,7 @@ public class GameLoop {
 
 			if (word.equals(String.valueOf(filler))) {
 				System.out.println(String.valueOf(filler) + "\nYou won!");
-				return wantToPlayAnotherGame();
+				return wantToPlayAnotherGame(1, 1, startLives);
 			}
 
 			System.out.println(String.valueOf(filler) + " life remaining = " + life);
@@ -71,7 +74,7 @@ public class GameLoop {
 			System.out.println("The correct word was: " + word + "\nYou lost");
 		}
 
-		return wantToPlayAnotherGame();
+		return wantToPlayAnotherGame(1, 0, startLives);
 	}
 
 	private int checkIfWordContainsInputCharacter(int life, String woord, char[] filler, char inputOfUser) {
@@ -107,15 +110,27 @@ public class GameLoop {
 		return filler;
 	}
 
-	private int wantToPlayAnotherGame() {
+	private int wantToPlayAnotherGame(int gamePlayed, int wordSolved, int lives) {
 		System.out.println(PropertyReader.getProperty("game.another", isDutch));
 		String input = scanner.next();
 		
 		if (!isInputValid(input)) {
-			return wantToPlayAnotherGame();
+			return wantToPlayAnotherGame(gamePlayed, wordSolved, lives);
 		}
-
+		saveUserStats(gamePlayed, wordSolved, lives);
 		return Integer.parseInt(input);
+	}
+
+	/*
+	 * This method is responsible for saving the stats of the game.
+	 * 
+	 * @param gamePlayed is always 1,
+	 * @param wordSolved depends if the word is guessed correctly or not
+	 * @lives is the start lives the player choose to play with.
+	 */
+	private void saveUserStats(int gamePlayed, int wordSolved, int lives) {
+		SaveUserDataToXml saveUserData = new SaveUserDataToXml(new UserData(gamePlayed, wordSolved, lives));
+		saveUserData.saveData(false);
 	}
 
 	/*

@@ -51,13 +51,13 @@ public class GameAssembler {
 				gameLoop = new GameLoop(scanner, retreiveHangmanWords(), isDutch);
 			}
 
-			int keuze = chooseDifficultyLevel();
-			returnToMainMenu = gameLoop.mainGameLoop(keuze);
+			int lives = chooseAmountOfLives();
+			returnToMainMenu = gameLoop.mainGameLoop(lives);
 
 		} while (returnToMainMenu != 2);
 	}
 
-	private int chooseDifficultyLevel() {
+	private int chooseAmountOfLives() {
 		return new SelectDifficultyLevelUI(scanner, isDutch).selectAmountOfLives();
 	}
 

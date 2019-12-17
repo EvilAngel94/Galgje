@@ -25,7 +25,7 @@ public class ReadUserDataToXml {
 
 	public static UserData readData(boolean unittest) {
 		File xmlFile;
-		
+
 		if (unittest) {
 			LOGGER.debug("Unittest is active..");
 			xmlFile = new File("userDataUnitTest.xml");
@@ -33,7 +33,7 @@ public class ReadUserDataToXml {
 			LOGGER.debug("Reading data from userData.xml..");
 			xmlFile = new File("userData.xml");
 		}
-		
+
 		JAXBContext jaxbContext;
 		UserData userDataFromFile = null;
 
@@ -46,6 +46,9 @@ public class ReadUserDataToXml {
 
 		} catch (JAXBException ex) {
 			LOGGER.debug("Error reading xml file of Userdata. {}", ex);
+			LOGGER.debug(
+					"Warning!! Retreiving the user information form the file is null. Therefore a new instance is created with 0 values..");
+			userDataFromFile = new UserData(0, 0, 0);
 		}
 		LOGGER.debug("Succesfull reading data from xml file.");
 		return userDataFromFile;

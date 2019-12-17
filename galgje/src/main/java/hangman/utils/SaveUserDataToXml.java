@@ -33,6 +33,9 @@ public class SaveUserDataToXml {
 			return false;
 		}
 
+		UserData oldData = ReadUserDataToXml.readData(unittest);
+		userData = addOldAndNewData(userData, oldData);
+
 		try {
 			// Create JAXB Context
 			JAXBContext jaxbContext = JAXBContext.newInstance(UserData.class);
@@ -45,20 +48,28 @@ public class SaveUserDataToXml {
 
 			File file;
 			// Store XML to File
-			if(unittest) {
+			if (unittest) {
 				file = new File("userDataUnitTest.xml");
-			}else {
+			} else {
 				file = new File("userData.xml");
 			}
-			
+
 			// Writes XML file to file-system
 			jaxbMarshaller.marshal(userData, file);
 			return true;
-			
+
 		} catch (JAXBException ex) {
 			LOGGER.debug("Error trying to save the userData: {}", ex);
 			return false;
 		}
 
+	}
+
+	private UserData addOldAndNewData(UserData userData, UserData oldData) {
+
+		userData.setGamesPlayed(userData.getGamesPlayed() + oldData.getGamesPlayed());
+		userData.setLivesUsed(userData.getLivesUsed() + oldData.getLivesUsed());
+		userData.setWordsSolved(userData.getWordsSolved() + oldData.getWordsSolved());
+		return userData;
 	}
 }
