@@ -37,24 +37,22 @@ public class SaveUserDataToXml {
 		userData = addOldAndNewData(userData, oldData);
 
 		try {
-			// Create JAXB Context
+
 			JAXBContext jaxbContext = JAXBContext.newInstance(UserData.class);
 
-			// Create Marshaller
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-			// Required formatting??
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
 			File file;
-			// Store XML to File
+
 			if (unittest) {
 				file = new File("userDataUnitTest.xml");
 			} else {
 				file = new File("userData.xml");
 			}
 
-			// Writes XML file to file-system
+			// Write the object to the file.
 			jaxbMarshaller.marshal(userData, file);
 			return true;
 
@@ -66,10 +64,10 @@ public class SaveUserDataToXml {
 	}
 
 	private UserData addOldAndNewData(UserData userData, UserData oldData) {
-
 		userData.setGamesPlayed(oldData.getGamesPlayed() + 1);
 		userData.setLivesUsed(userData.getLivesUsed() + oldData.getLivesUsed());
 		userData.setWordsSolved(userData.getWordsSolved() + oldData.getWordsSolved());
+
 		return userData;
 	}
 }

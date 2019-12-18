@@ -51,6 +51,7 @@ public class ReadUserDataToXml {
 			userDataFromFile = new UserData(0, 0);
 			userDataFromFile.setGamesPlayed(0);
 		}
+		
 		LOGGER.debug("Succesfull reading data from xml file.");
 		return userDataFromFile;
 	}
