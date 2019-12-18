@@ -64,7 +64,7 @@ public class GameLoop {
 
 			if (word.equals(String.valueOf(filler))) {
 				System.out.println(String.valueOf(filler) + "\nYou won!");
-				return wantToPlayAnotherGame(1, 1, startLives);
+				return wantToPlayAnotherGame(true, startLives - life);
 			}
 
 			System.out.println(String.valueOf(filler) + " life remaining = " + life);
@@ -74,7 +74,7 @@ public class GameLoop {
 			System.out.println("The correct word was: " + word + "\nYou lost");
 		}
 
-		return wantToPlayAnotherGame(1, 0, startLives);
+		return wantToPlayAnotherGame(false, startLives);
 	}
 
 	private int checkIfWordContainsInputCharacter(int life, String woord, char[] filler, char inputOfUser) {
@@ -110,14 +110,14 @@ public class GameLoop {
 		return filler;
 	}
 
-	private int wantToPlayAnotherGame(int gamePlayed, int wordSolved, int lives) {
+	private int wantToPlayAnotherGame(boolean wordSolved, int lives) {
 		System.out.println(PropertyReader.getProperty("game.another", isDutch));
 		String input = scanner.next();
 		
 		if (!isInputValid(input)) {
-			return wantToPlayAnotherGame(gamePlayed, wordSolved, lives);
+			return wantToPlayAnotherGame(wordSolved, lives);
 		}
-		saveUserStats(gamePlayed, wordSolved, lives);
+		saveUserStats(wordSolved, lives);
 		return Integer.parseInt(input);
 	}
 
@@ -128,8 +128,9 @@ public class GameLoop {
 	 * @param wordSolved depends if the word is guessed correctly or not
 	 * @lives is the start lives the player choose to play with.
 	 */
-	private void saveUserStats(int gamePlayed, int wordSolved, int lives) {
-		SaveUserDataToXml saveUserData = new SaveUserDataToXml(new UserData(gamePlayed, wordSolved, lives));
+	private void saveUserStats(boolean wordSolved, int lives) {
+		int solved = wordSolved ? 1 : 0;
+		SaveUserDataToXml saveUserData = new SaveUserDataToXml(new UserData(solved, lives));
 		saveUserData.saveData(false);
 	}
 

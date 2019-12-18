@@ -67,7 +67,7 @@ public class SaveUserDataToXml {
 
 	private UserData addOldAndNewData(UserData userData, UserData oldData) {
 
-		userData.setGamesPlayed(userData.getGamesPlayed() + oldData.getGamesPlayed());
+		userData.setGamesPlayed(oldData.getGamesPlayed() + 1);
 		userData.setLivesUsed(userData.getLivesUsed() + oldData.getLivesUsed());
 		userData.setWordsSolved(userData.getWordsSolved() + oldData.getWordsSolved());
 		return userData;

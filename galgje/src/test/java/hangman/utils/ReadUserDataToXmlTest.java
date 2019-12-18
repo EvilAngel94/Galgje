@@ -19,14 +19,14 @@ public class ReadUserDataToXmlTest {
 
 	@Test
 	public void readDataCorrect() {
-		UserData userData = new UserData(8, 9, 10);
+		UserData userData = new UserData(9, 10);
 		SaveUserDataToXml saveUserData = new SaveUserDataToXml(userData);
 		assertTrue(saveUserData.saveData(true));
 		
 		UserData userdata = ReadUserDataToXml.readData(true);
-		assertEquals(8, userdata.getGamesPlayed());
+		assertEquals(1, userdata.getGamesPlayed());
 		assertEquals(9, userdata.getWordsSolved());
 		assertEquals(10, userdata.getLivesUsed());
 	}
-
+	
 }

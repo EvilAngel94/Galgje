@@ -19,9 +19,8 @@ public class UserData {
 	private int wordsSolved;
 	private int livesUsed;
 
-	public UserData(int gamePlayed, int wordsSolved, int livesUsed) {
+	public UserData(int wordsSolved, int livesUsed) {
 		super();
-		this.gamesPlayed = gamePlayed;
 		this.wordsSolved = wordsSolved;
 		this.livesUsed = livesUsed;
 	}

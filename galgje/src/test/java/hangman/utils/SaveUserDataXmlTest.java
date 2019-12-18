@@ -24,7 +24,8 @@ public class SaveUserDataXmlTest {
 
 	@Test
 	public void saveUserDataCorrect() {
-		userData = new UserData(8, 9, 10);
+		userData = new UserData(9, 10);
+		userData.setGamesPlayed(8);
 		saveUserData = new SaveUserDataToXml(userData);
 		assertTrue(saveUserData.saveData(true));
 		assertTrue(TestUtils.getInstance().rowsFoundInFile(new File("userDataUnitTest.xml"), Arrays.asList(
@@ -33,21 +34,24 @@ public class SaveUserDataXmlTest {
 
 	@Test
 	public void saveUserDataIncorrectGamesPlayed() {
-		userData = new UserData(-10, 10, 10);
+		userData = new UserData(10, 10);
+		userData.setGamesPlayed(-10);
 		saveUserData = new SaveUserDataToXml(userData);
 		assertFalse(saveUserData.saveData(true));
 	}
 
 	@Test
 	public void saveUserDataIncorrectWordsPlayed() {
-		userData = new UserData(10, -10, 10);
+		userData = new UserData(-10, 10);
+		userData.setGamesPlayed(10);
 		saveUserData = new SaveUserDataToXml(userData);
 		assertFalse(saveUserData.saveData(true));
 	}
 
 	@Test
 	public void saveUserDataIncorrectLivesUsed() {
-		userData = new UserData(10, 10, -10);
+		userData = new UserData(10, -10);
+		userData.setGamesPlayed(10);
 		saveUserData = new SaveUserDataToXml(userData);
 		assertFalse(saveUserData.saveData(true));
 	}

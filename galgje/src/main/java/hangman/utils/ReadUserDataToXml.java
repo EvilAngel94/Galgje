@@ -48,7 +48,8 @@ public class ReadUserDataToXml {
 			LOGGER.debug("Error reading xml file of Userdata. {}", ex);
 			LOGGER.debug(
 					"Warning!! Retreiving the user information form the file is null. Therefore a new instance is created with 0 values..");
-			userDataFromFile = new UserData(0, 0, 0);
+			userDataFromFile = new UserData(0, 0);
+			userDataFromFile.setGamesPlayed(0);
 		}
 		LOGGER.debug("Succesfull reading data from xml file.");
 		return userDataFromFile;
