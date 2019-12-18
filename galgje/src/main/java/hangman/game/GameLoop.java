@@ -46,16 +46,17 @@ public class GameLoop {
 		int startLives = life;
 
 		char[] filler = createEmptyPlayableLine(word);
-		System.out.println(String.valueOf(filler) + " life remaining = " + life);
 
 		ArrayList<Character> alreadyChosenOptions = new ArrayList<>();
 
 		// While the player has lives left, the main gameloop will run.
-		while (life > 0) { 
+		while (life > 0) {
+			System.out.println(
+					String.valueOf(filler) + " " + PropertyReader.getProperty("game.loop.life", isDutch) + life);
 			char inputOfUser = scanner.next().charAt(0);
 
 			if (alreadyChosenOptions.contains(inputOfUser)) {
-				System.out.println("You've already enterd: " + inputOfUser);
+				System.out.println(PropertyReader.getProperty("game.loop.alreadychosen", isDutch) + " " + inputOfUser);
 				continue;
 			}
 
@@ -63,15 +64,14 @@ public class GameLoop {
 			life = checkIfWordContainsInputCharacter(life, word, filler, inputOfUser);
 
 			if (word.equals(String.valueOf(filler))) {
-				System.out.println(String.valueOf(filler) + "\nYou won!");
+				System.out.println(String.valueOf(filler) + PropertyReader.getProperty("game.loop.win", isDutch));
 				return wantToPlayAnotherGame(true, startLives - life);
 			}
-
-			System.out.println(String.valueOf(filler) + " life remaining = " + life);
 		}
 
 		if (life == 0) {
-			System.out.println("The correct word was: " + word + "\nYou lost");
+			System.out.println(PropertyReader.getProperty("game.loop.correctword", isDutch) + word
+					+ PropertyReader.getProperty("game.loop.lost", isDutch));
 		}
 
 		return wantToPlayAnotherGame(false, startLives);
@@ -93,27 +93,29 @@ public class GameLoop {
 	}
 
 	/*
-	 * Creates the first representation of the word. Meaning, the length of the word will be converted to '-' characters.
+	 * Creates the first representation of the word. Meaning, the length of the word
+	 * will be converted to '-' characters.
 	 */
 	private char[] createEmptyPlayableLine(String woord) {
 		char[] filler = new char[woord.length()];
 		int index = 0;
 		while (index < woord.length()) {
 			filler[index] = '-';
-			// When a space is present in the word, it will be displayed as space. Not as '-'.
+			// When a space is present in the word, it will be displayed as space. Not as
+			// '-'.
 			if (woord.charAt(index) == ' ') {
 				filler[index] = ' ';
 			}
 			index++;
 		}
-		
+
 		return filler;
 	}
 
 	private int wantToPlayAnotherGame(boolean wordSolved, int lives) {
 		System.out.println(PropertyReader.getProperty("game.another", isDutch));
 		String input = scanner.next();
-		
+
 		if (!isInputValid(input)) {
 			return wantToPlayAnotherGame(wordSolved, lives);
 		}
@@ -125,7 +127,9 @@ public class GameLoop {
 	 * This method is responsible for saving the stats of the game.
 	 * 
 	 * @param gamePlayed is always 1,
+	 * 
 	 * @param wordSolved depends if the word is guessed correctly or not
+	 * 
 	 * @lives is the start lives the player choose to play with.
 	 */
 	private void saveUserStats(boolean wordSolved, int lives) {
@@ -159,10 +163,10 @@ public class GameLoop {
 		} catch (NoSuchAlgorithmException e) {
 			LOGGER.error("Hangmang word cannot be selected based on key chosen. Error: {}", e);
 		}
-		
+
 		return 0;
 	}
-	
+
 	private boolean isInputValid(String input) {
 		if (!Validator.isNummeric(input)) {
 			System.out.println(PropertyReader.getProperty("validation.input.invalid", isDutch));
@@ -180,7 +184,7 @@ public class GameLoop {
 			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch));
 			return false;
 		}
-		
+
 		return true;
 	}
 }
