@@ -16,7 +16,7 @@ import hangman.ui.SelectWordLengthUI;
  * startup of the game. As well as processing the incoming data and distributing
  * this to the other components.
  * 
- * {@link GameLogic}
+ * {@link GameLoop}
  * 
  * @author PolarBear Dev
  *
@@ -40,24 +40,24 @@ public class GameAssembler {
 	 * logic is combined within this method. From choosing the difficulty level, to
 	 * the list of words to be played with.
 	 */
-	public void runGameLogic() {
+	public void runGameLoop() {
 		int returnToMainMenu = 0;
 
-		GameLogic gameLogic = new GameLogic(scanner, retreiveHangmanWords(), isDutch);
+		GameLoop gameLoop = new GameLoop(scanner, retreiveHangmanWords(), isDutch);
 		
 		do {
 			
 			if(returnToMainMenu == 3) {
-				gameLogic = new GameLogic(scanner, retreiveHangmanWords(), isDutch);
+				gameLoop = new GameLoop(scanner, retreiveHangmanWords(), isDutch);
 			}
 
-			int keuze = chooseDifficultyLevel();
-			returnToMainMenu = gameLogic.gamePlay(keuze);
+			int lives = chooseAmountOfLives();
+			returnToMainMenu = gameLoop.mainGameLoop(lives);
 
 		} while (returnToMainMenu != 2);
 	}
 
-	private int chooseDifficultyLevel() {
+	private int chooseAmountOfLives() {
 		return new SelectDifficultyLevelUI(scanner, isDutch).selectAmountOfLives();
 	}
 

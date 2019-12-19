@@ -1,4 +1,4 @@
-package utils;
+package hangman.utils;
 
 import static org.junit.Assert.*;
 
