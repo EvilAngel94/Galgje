@@ -4,7 +4,7 @@
 
 	<groupId>polar.bear</groupId>
 	<artifactId>galgje</artifactId>
-	<version>0.3-SNAPSHOT</version>
+	<version>0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>galgje</name>
