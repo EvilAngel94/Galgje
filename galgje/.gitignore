@@ -1,1 +1,15 @@
+#Ignore logs
+*.log
+
+#Ignore all target classes
 /target/
+
+#Ignore .classpath
+.classpath
+
+#Ignore .project setup
+.project
+
+#Ignore userdata xml
+userData.xml
+userDataUnitTest.xml
