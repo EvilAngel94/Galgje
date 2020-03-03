@@ -11,6 +11,10 @@ import org.apache.logging.log4j.Logger;
 
 import hangman.game.save.UserData;
 
+/**
+ * This class is responsible for saving the game data after a played game.
+ *
+ */
 public class SaveUserDataToXml {
 	private static final Logger LOGGER = LogManager.getLogger(SaveUserDataToXml.class);
 
@@ -39,9 +43,7 @@ public class SaveUserDataToXml {
 		try {
 
 			JAXBContext jaxbContext = JAXBContext.newInstance(UserData.class);
-
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
 			File file;
@@ -55,7 +57,7 @@ public class SaveUserDataToXml {
 			// Write the object to the file.
 			jaxbMarshaller.marshal(userData, file);
 			return true;
-
+			
 		} catch (JAXBException ex) {
 			LOGGER.debug("Error trying to save the userData: {}", ex);
 			return false;

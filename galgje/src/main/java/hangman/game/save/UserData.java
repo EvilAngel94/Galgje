@@ -62,19 +62,22 @@ public class UserData {
 				+ "\nAmount of lives used = " + livesUsed + "\n";
 	}
 
+	/**
+	 * Deze methode moet alles controleren, anders kan het voorkomen dat niet alles goed gecontroleerd wordt.
+	 * @return 	
+	 * 			true -> wanneer alle waardes goed zijn
+	 * 			false -> wanneer een waarde lager is dan 0
+	 */
 	public boolean isValid() {
 		if (gamesPlayed < 0) {
 			return false;
 		}
-
 		if (wordsSolved < 0) {
 			return false;
 		}
-
 		if (livesUsed < 0) {
 			return false;
 		}
-
 		return true;
 	}
 

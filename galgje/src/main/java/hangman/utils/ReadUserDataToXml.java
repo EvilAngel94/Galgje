@@ -1,7 +1,6 @@
 package hangman.utils;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -24,6 +23,12 @@ public class ReadUserDataToXml {
 		super();
 	}
 
+	/**
+	 * This method is responsible for reading the data from the XML file. 
+	 * 
+	 * @param unittest 
+	 * @return The {@link UserData} retreived form the file.
+	 */
 	public static UserData readData(boolean unittest) {
 		File xmlFile;
 
@@ -39,11 +44,9 @@ public class ReadUserDataToXml {
 		UserData userDataFromFile = null;
 
 		try {
-
+			
 			jaxbContext = JAXBContext.newInstance(UserData.class);
-
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-
 			userDataFromFile = (UserData) jaxbUnmarshaller.unmarshal(xmlFile);
 
 		} catch (JAXBException ex) {

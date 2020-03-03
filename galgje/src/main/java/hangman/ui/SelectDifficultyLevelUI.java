@@ -23,6 +23,10 @@ public class SelectDifficultyLevelUI {
 		PropertyReader.getInstance();
 	}
 
+	/**
+	 * This makes it possible for the user to select the amount of lives it want to have during the game.
+	 * @return int - amount of lives
+	 */
 	public int selectAmountOfLives() {
 		System.out.println(PropertyReader.getProperty("select.difficulty", isDutch));
 

@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import hangman.game.save.UserData;
+import utils.TestUtils;
 
 public class SaveUserDataXmlTest {
 
