@@ -4,8 +4,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import hangman.game.save.UserData;
@@ -15,21 +18,42 @@ public class SaveUserDataXmlTest {
 	private UserData userData;
 	private SaveUserDataToXml saveUserData;
 
+	@Before
+	public void setup() throws IOException {
+		deleteFileIfPresent();
+		new File("userDataUnitTest.xml").createNewFile();
+	}
+
 	@After
 	public void tearDown() {
-		new File("userDataUnitTest.xml").deleteOnExit();
+		deleteFileIfPresent();
 	}
 
 	@Test
-	public void saveUserDataCorrect() throws InterruptedException {
+	public void saveUserGamesPlayedFoundInXML() {
+		saveUserDataBase();
+		assertTrue(TestUtils.getInstance().rowsFoundInFile(new File("userDataUnitTest.xml"),
+				Arrays.asList("<gamesPlayed>")));
+	}
+
+	@Test
+	public void saveUserWordsSolvedFoundInXML() {
+		saveUserDataBase();
+		assertTrue(TestUtils.getInstance().rowsFoundInFile(new File("userDataUnitTest.xml"),
+				Arrays.asList("<wordsSolved>")));
+	}
+
+	@Test
+	public void saveUserLivesUsedFoundInXML() {
+		saveUserDataBase();
+		assertTrue(TestUtils.getInstance().rowsFoundInFile(new File("userDataUnitTest.xml"),
+				Arrays.asList("<livesUsed>")));
+	}
+
+	private void saveUserDataBase() {
 		userData = new UserData(9, 10);
-		userData.setGamesPlayed(8);
 		saveUserData = new SaveUserDataToXml(userData);
 		assertTrue(saveUserData.saveData(true));
-		// assertTrue(TestUtils.getInstance().rowsFoundInFile(new
-		// File("userDataUnitTest.xml"), Arrays.asList(
-		// "<gamesPlayed>8</gamesPlayed>", "<wordsSolved>1</wordsSolved>",
-		// "<livesUsed>10</livesUsed>")));
 	}
 
 	@Test
@@ -54,6 +78,10 @@ public class SaveUserDataXmlTest {
 		userData.setGamesPlayed(10);
 		saveUserData = new SaveUserDataToXml(userData);
 		assertFalse(saveUserData.saveData(true));
+	}
+
+	private void deleteFileIfPresent() {
+		new File("userDataUnitTest.xml").deleteOnExit();
 	}
 
 }
