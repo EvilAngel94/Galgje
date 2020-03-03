@@ -1,6 +1,7 @@
 package hangman.utils;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -38,6 +39,7 @@ public class ReadUserDataToXml {
 		UserData userDataFromFile = null;
 
 		try {
+
 			jaxbContext = JAXBContext.newInstance(UserData.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -51,7 +53,7 @@ public class ReadUserDataToXml {
 			userDataFromFile = new UserData(0, 0);
 			userDataFromFile.setGamesPlayed(0);
 		}
-		
+
 		LOGGER.debug("Succesfull reading data from xml file.");
 		return userDataFromFile;
 	}

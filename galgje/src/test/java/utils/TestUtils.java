@@ -33,7 +33,7 @@ public class TestUtils {
 			// "brief::contains" is hetzelfde als "gegevens -> brief.contains(gegevens));"
 			elementIsGevonden = gegevensDieMoetenVoorkomen.stream().anyMatch(xmlBestandVanUserData::contains);
 
-		} catch (@SuppressWarnings("unused") IOException e) {
+		} catch (IOException e) {
 			fail("Gegevens komen wel voor in xml bestand..");
 		}
 
