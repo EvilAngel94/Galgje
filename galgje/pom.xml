@@ -14,6 +14,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version-junit>4.12</version-junit>
+		<version.mockito>3.3.0</version.mockito>
 		<log4j.version>2.5</log4j.version>
 		<commons-io.version>2.5</commons-io.version>
 		<javax.version>2.3.0</javax.version>
@@ -27,7 +28,14 @@
 			<version>${version-junit}</version>
 			<scope>test</scope>
 		</dependency>
-
+		<!-- 
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${version.mockito}</version>
+			<scope>test</scope>
+		</dependency>
+ 		-->
 		<!-- Log dependencies -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
