@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringJoiner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -72,6 +71,8 @@ public class WordListInteraction {
 	}
 
 	public void addNewWordToCsvList(String nameOfTheWordList, String wordToAdd) throws IOException {
+		//Je kan niet opeens nieuwe woordenlijsten updaten die in src/main/resources zitten.. Dus moet je deze in je root folder doen denk ik. Of in een apart mapje.. 
+		//Moet je even goed kijken. Het gaat in ieder geval wel goed ;)
 		LOGGER.info("{} tries to be added to {}", nameOfTheWordList, wordToAdd);
 
 		hangmanWords = readsSelectedCSVFile(nameOfTheWordList);

@@ -42,6 +42,7 @@ public class WordListInteractionTest {
 	public void addNewWordToCsvFile() throws IOException {
 		WordListInteraction interactions = new WordListInteraction();
 		interactions.addNewWordToCsvList("4_words_english.csv", "TestTest");
+		
 		galgjeWoorden = interactions.readsSelectedCSVFile("4_words_english.csv");
 
 		assertEquals(61, galgjeWoorden.size());
