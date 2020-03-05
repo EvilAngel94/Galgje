@@ -10,9 +10,9 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import hangman.game.save.SaveUserDataToXml;
 import hangman.game.save.UserData;
 import hangman.utils.PropertyReader;
-import hangman.utils.SaveUserDataToXml;
 import hangman.utils.Validator;
 
 /**

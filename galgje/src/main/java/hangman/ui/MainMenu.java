@@ -6,9 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import hangman.game.GameAssembler;
+import hangman.game.save.ReadUserDataToXml;
 import hangman.game.save.UserData;
 import hangman.utils.PropertyReader;
-import hangman.utils.ReadUserDataToXml;
 import hangman.utils.Validator;
 
 /**

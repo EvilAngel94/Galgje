@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import hangman.utils.SaveUserDataToXml;
-
 /**
  * This class is the representation of the user data. Each of the elements are
  * saved within the xml file.

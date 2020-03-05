@@ -1,4 +1,4 @@
-package hangman.utils;
+package hangman.game.wordlist;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

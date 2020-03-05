@@ -7,9 +7,9 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import hangman.game.wordlist.WordListReader;
 import hangman.utils.PropertyReader;
 import hangman.utils.Validator;
-import hangman.utils.WordListReader;
 
 /**
  * This class is responsible for the interactions when the player has the choice

@@ -1,4 +1,4 @@
-package hangman.utils;
+package hangman.game.save;
 
 import java.io.File;
 
@@ -8,8 +8,6 @@ import javax.xml.bind.Unmarshaller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import hangman.game.save.UserData;
 
 /**
  * This class is responsible for reading the xml file and put the values found
