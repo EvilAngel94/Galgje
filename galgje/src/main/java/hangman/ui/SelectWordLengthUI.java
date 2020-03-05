@@ -22,13 +22,13 @@ public class SelectWordLengthUI {
 
 	private static final Logger LOGGER = LogManager.getLogger(SelectWordLengthUI.class);
 
-	private static final String WORDS_GALGJE_FOUR = "4_words_galgje.csv";
-	private static final String WORDS_GALGJE_FIVE = "5_words_galgje.csv";
+	private static final String DUTCH_WORD_LIST = "dutch.csv";
+	private static final String ENGLISH_WORD_LIST = "english.csv";
 
 	private final Scanner scanner;
 	private boolean isDutch;
 
-	private WordListReader uitlezen;
+	private WordListReader csvReader;
 
 	public SelectWordLengthUI(Scanner scanner, boolean isDutch) {
 		super();
@@ -38,10 +38,10 @@ public class SelectWordLengthUI {
 
 	public Map<Integer, String> loadWordList() throws IOException {
 		PropertyReader.getInstance();
-		if (uitlezen == null) {
-			uitlezen = new WordListReader();
+		if (csvReader == null) {
+			csvReader = new WordListReader();
 		}
-
+		
 		Map<Integer, String> galgjeWoorden = null;
 		System.out.println(PropertyReader.getProperty("select.word.choices", isDutch));
 
@@ -52,11 +52,13 @@ public class SelectWordLengthUI {
 		int keuze = Integer.parseInt(input);
 
 		if (keuze == 1) {
-			galgjeWoorden = uitlezen.readsSelectedCSVFile(WORDS_GALGJE_FOUR);
+			String woordenlijst ="4_words_" + (isDutch ? DUTCH_WORD_LIST: ENGLISH_WORD_LIST);
+			galgjeWoorden = csvReader.readsSelectedCSVFile(woordenlijst);
 			return galgjeWoorden;
 		}
 		if (keuze == 2) {
-			galgjeWoorden = uitlezen.readsSelectedCSVFile(WORDS_GALGJE_FIVE);
+			String woordenlijst ="5_words_" + (isDutch ? DUTCH_WORD_LIST: ENGLISH_WORD_LIST);
+			galgjeWoorden = csvReader.readsSelectedCSVFile(woordenlijst);
 			return galgjeWoorden;
 		}
 
