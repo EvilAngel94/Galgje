@@ -7,7 +7,7 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import hangman.game.wordlist.WordListReader;
+import hangman.game.wordlist.WordListInteraction;
 import hangman.utils.PropertyReader;
 import hangman.utils.Validator;
 
@@ -28,7 +28,7 @@ public class SelectWordLengthUI {
 	private final Scanner scanner;
 	private boolean isDutch;
 
-	private WordListReader csvReader;
+	private WordListInteraction csvReader;
 
 	public SelectWordLengthUI(Scanner scanner, boolean isDutch) {
 		super();
@@ -39,7 +39,7 @@ public class SelectWordLengthUI {
 	public Map<Integer, String> loadWordList() throws IOException {
 		PropertyReader.getInstance();
 		if (csvReader == null) {
-			csvReader = new WordListReader();
+			csvReader = new WordListInteraction();
 		}
 		
 		Map<Integer, String> galgjeWoorden = null;
