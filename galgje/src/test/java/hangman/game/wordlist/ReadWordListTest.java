@@ -8,44 +8,34 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import hangman.game.wordlist.WordListInteraction;
-
-public class WordListInteractionTest {
+public class ReadWordListTest {
 
 	private Map<Integer, String> galgjeWoorden = new HashMap<>();
+	
+	private ReadWordList reader = new ReadWordList();
 
 	@Test
 	public void readCSV4WordsDutch() throws IOException {
-		galgjeWoorden = new WordListInteraction().readsSelectedCSVFile("4_words_dutch.csv");
+		galgjeWoorden = reader.readDefaultWordList("4_words_dutch.csv");
 		assertEquals(60, galgjeWoorden.size());
 	}
 
 	@Test
 	public void readCSV5WordsDutch() throws IOException {
-		galgjeWoorden = new WordListInteraction().readsSelectedCSVFile("5_words_dutch.csv");
+		galgjeWoorden = reader.readDefaultWordList("5_words_dutch.csv");
 		assertEquals(60, galgjeWoorden.size());
 	}
 
 	@Test
 	public void readCsv4WordEnglish() throws IOException {
-		galgjeWoorden = new WordListInteraction().readsSelectedCSVFile("4_words_english.csv");
+		galgjeWoorden = reader.readDefaultWordList("4_words_english.csv");
 		assertEquals(60, galgjeWoorden.size());
 	}
 
 	@Test
 	public void readCsv5WordEnglish() throws IOException {
-		galgjeWoorden = new WordListInteraction().readsSelectedCSVFile("5_words_english.csv");
+		galgjeWoorden = reader.readDefaultWordList("5_words_english.csv");
 		assertEquals(60, galgjeWoorden.size());
-	}
-
-	@Test
-	public void addNewWordToCsvFile() throws IOException {
-		WordListInteraction interactions = new WordListInteraction();
-		interactions.addNewWordToCsvList("4_words_english.csv", "TestTest");
-		
-		galgjeWoorden = interactions.readsSelectedCSVFile("4_words_english.csv");
-
-		assertEquals(61, galgjeWoorden.size());
 	}
 
 	private Map<Integer, String> createStubMap() {
