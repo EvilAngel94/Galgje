@@ -28,8 +28,8 @@ public class AddWordToWordList {
 
 	public void addNewWordToCsvList(String nameOfTheWordList, String wordToAdd) throws IOException {
 		LOGGER.info("{} tries to be added to {}", wordToAdd, nameOfTheWordList);
-		Map<Integer, String> hangmanWords = null;
-		hangmanWords = reader.readUserDefinedWordList(nameOfTheWordList);
+
+		Map<Integer, String> hangmanWords = reader.readUserDefinedWordList(nameOfTheWordList);
 
 		addNewWordToCsvFile(nameOfTheWordList, hangmanWords, wordToAdd);
 	}
@@ -57,8 +57,7 @@ public class AddWordToWordList {
 
 			LOGGER.info("Succesfully added word to csv file {}", entityCombination);
 		} catch (IOException e) {
-			LOGGER.info("Could not add new word to exising file {} /nStacktrace:{}", nameOfTheWordList,
-					e.getMessage());
+			LOGGER.info("Could not add new word to exising file {} /nStacktrace:{}", nameOfTheWordList, e.getMessage());
 		}
 	}
 }

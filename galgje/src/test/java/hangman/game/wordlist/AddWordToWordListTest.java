@@ -11,9 +11,8 @@ public class AddWordToWordListTest {
 
 	@Test
 	public void addNewWordToCsvFile() throws IOException {
-		
-		AddWordToWordList interactions = new AddWordToWordList();
-		interactions.addNewWordToCsvList("4_words_english.csv", "TestTest");
+		AddWordToWordList addWordToList = new AddWordToWordList();
+		addWordToList.addNewWordToCsvList("4_words_english.csv", "TestTest");
 		
 		Map<Integer, String> galgjeWoorden = new ReadWordList().readUserDefinedWordList("4_words_english.csv");
 
