@@ -59,7 +59,7 @@ public class ReadWordList {
 	 * @throws IOException
 	 */
 	public Map<Integer, String> readUserDefinedWordList(String nameOfTheWordList) throws IOException {
-		File file = new File("user_wordlist/" + nameOfTheWordList);
+		File file = new File("./user_wordlist/" + nameOfTheWordList);
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
 			addWordsToHangmanMap(reader);

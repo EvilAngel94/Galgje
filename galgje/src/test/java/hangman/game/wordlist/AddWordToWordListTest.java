@@ -12,10 +12,10 @@ public class AddWordToWordListTest {
 	@Test
 	public void addNewWordToCsvFile() throws IOException {
 		
-		WordListInteraction interactions = new WordListInteraction();
+		AddWordToWordList interactions = new AddWordToWordList();
 		interactions.addNewWordToCsvList("4_words_english.csv", "TestTest");
 		
-		Map<Integer, String> galgjeWoorden = new ReadWordList().readDefaultWordList("4_words_english.csv");
+		Map<Integer, String> galgjeWoorden = new ReadWordList().readUserDefinedWordList("4_words_english.csv");
 
 		assertEquals(61, galgjeWoorden.size());
 	}
