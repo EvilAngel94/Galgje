@@ -21,7 +21,6 @@ public class AddWordToWordList {
 
 	private ReadWordList reader = new ReadWordList();
 
-	/** Constructor */
 	public AddWordToWordList() {
 		super();
 	}

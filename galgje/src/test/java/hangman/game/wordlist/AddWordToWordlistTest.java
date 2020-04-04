@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-public class AddWordToWordListTest {
+public class AddWordToWordlistTest {
 
 	@Test
 	public void addNewWordToCsvFile() throws IOException {

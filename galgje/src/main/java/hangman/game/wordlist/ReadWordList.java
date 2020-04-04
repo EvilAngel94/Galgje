@@ -78,7 +78,6 @@ public class ReadWordList {
 		// first line should be ignored, that's why the value is not used
 		String line = reader.readLine();
 
-		// This checks if the reader has a next line.
 		while ((line = reader.readLine()) != null) {
 
 			String[] field = line.split(seperator);

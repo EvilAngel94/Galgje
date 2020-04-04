@@ -8,10 +8,10 @@ import java.util.Map;
 
 import org.junit.Test;
 
-public class ReadWordListTest {
+public class ReadDefaultWordlistTest {
 
 	private Map<Integer, String> galgjeWoorden = new HashMap<>();
-	
+
 	private ReadWordList reader = new ReadWordList();
 
 	@Test
@@ -36,12 +36,5 @@ public class ReadWordListTest {
 	public void readCsv5WordEnglish() throws IOException {
 		galgjeWoorden = reader.readDefaultWordList("5_words_english.csv");
 		assertEquals(60, galgjeWoorden.size());
-	}
-
-	private Map<Integer, String> createStubMap() {
-		for (int i = 0; i < 60; i++) {
-			galgjeWoorden.put(i, "test_" + i);
-		}
-		return galgjeWoorden;
 	}
 }
