@@ -26,7 +26,7 @@ class AddWordToWordList {
 	public static void addNewWordToCsvList(String nameOfTheWordList, String wordToAdd) throws IOException {
 		LOGGER.info("{} tries to be added to {}", wordToAdd, nameOfTheWordList);
 
-		Map<Integer, String> hangmanWords = new ReadWordList().readUserDefinedWordList(nameOfTheWordList);
+		Map<Integer, String> hangmanWords = WordlistInteractions.readUserDefinedWordlist(nameOfTheWordList);
 
 		addNewWordToCsvFile(nameOfTheWordList, hangmanWords, wordToAdd);
 	}
@@ -34,7 +34,7 @@ class AddWordToWordList {
 	private static void addNewWordToCsvFile(String nameOfTheWordList, Map<Integer, String> hangmanWords, String wordToAdd) {
 		try (FileWriter csvWriter = new FileWriter(new File("./user_wordlist/" + nameOfTheWordList))) {
 
-			WordlistUtils.writeUserDefinedWordsToCsv(nameOfTheWordList, hangmanWords, wordToAdd, csvWriter);
+			WordlistUtils.writeUserDefinedWordToCsv(nameOfTheWordList, hangmanWords, wordToAdd, csvWriter);
 			
 		} catch (IOException e) {
 			LOGGER.info("Could not add new word to exising file {} /nStacktrace:{}", nameOfTheWordList, e.getMessage());

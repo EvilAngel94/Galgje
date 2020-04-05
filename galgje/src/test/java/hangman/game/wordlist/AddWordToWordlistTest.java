@@ -27,7 +27,6 @@ public class AddWordToWordlistTest {
 
 	@Test
 	public void addNewWordToCsvFile() throws IOException {
-
 		AddWordToWordList.addNewWordToCsvList(nameOfTheFile, "TestTest");
 		Map<Integer, String> galgjeWoorden = WordlistInteractions.readUserDefinedWordlist(nameOfTheFile);
 		assertEquals(61, galgjeWoorden.size());

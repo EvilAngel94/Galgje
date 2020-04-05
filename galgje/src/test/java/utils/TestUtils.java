@@ -31,7 +31,6 @@ public class TestUtils {
 		boolean elementIsGevonden = false;
 
 		try {
-
 			String xmlBestandVanUserData = FileUtils.readFileToString(userDataXml, StandardCharsets.UTF_8);
 			// "brief::contains" is hetzelfde als "gegevens -> brief.contains(gegevens));"
 			elementIsGevonden = gegevensDieMoetenVoorkomen.stream().anyMatch(xmlBestandVanUserData::contains);
@@ -45,21 +44,23 @@ public class TestUtils {
 
 	public String createTestCsvFile() {
 		String nameOfFile = "test.csv";
+		
 		try (FileWriter csvWriter = new FileWriter(new File("./user_wordlist/" + nameOfFile))) {
 			csvWriter.append("id,test\n");
 			createStubMap().forEach((key, value) -> {
 				try {
 					csvWriter.append((key + "") + "," + value + "\n");
 				} catch (IOException e) {
-					System.out.println("Something went wrong in testUtils.");
+					fail("Something went wrong in testUtils.");
 				}
 			});
 
 			csvWriter.flush();
+			
 		} catch (Exception ex) {
-			System.out.println("Something went wrong in testUtils.");
+			fail("Something went wrong in testUtils.");
 		}
-
+		
 		return nameOfFile;
 	}
 	
@@ -74,6 +75,5 @@ public class TestUtils {
 		}
 		return galgjeWoorden;
 	}
-
 	
 }

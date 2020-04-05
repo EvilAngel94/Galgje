@@ -14,33 +14,38 @@ import org.apache.logging.log4j.Logger;
  *
  */
 public class WordlistInteractions {
-	
+
 	private static final Logger LOGGER = LogManager.getLogger(WordlistInteractions.class);
 
 	private WordlistInteractions() {
 		super();
 	}
 
-	public void addNewWordToList(String nameOfTheWordList, String wordToAdd) {
+	public static void addNewWordToList(String nameOfTheWordList, String wordToAdd) {
 		try {
 			AddWordToWordList.addNewWordToCsvList(nameOfTheWordList, wordToAdd);
-			
+
 		} catch (IOException e) {
 			LOGGER.error("Something went wrong while trying to add a new word. /nStacktrace: {}", e);
 		}
 	}
 
-	public void deleteWordFromUserDefinedWordlist(String nameOfTheWordList, String wordToDelete) {
+	public static void deleteWordFromUserDefinedWordlist(String nameOfTheWordList, String wordToDelete) {
 		try {
 			DeleteWordFromWordList.deleteWordFromCsvList(nameOfTheWordList, wordToDelete);
-			
+
 		} catch (IOException e) {
 			LOGGER.error("Something went wrong while trying to delete a word. /nStacktrace: {}", e);
 		}
 	}
 
-	public void updateWordlist(String nameOfTheWordList, Map<Integer, String> hangmanWords) {
-		UpdateWordlist.updateWordlist(nameOfTheWordList, hangmanWords);
+	public static void updateWordlist(String nameOfTheWordList, Map<Integer, String> hangmanWords) {
+		try {
+			UpdateWordlist.updateWordlist(nameOfTheWordList, hangmanWords);
+			
+		} catch (IOException e) {
+			LOGGER.error("Could not update wordlist {}. /nStacktrace: {}", nameOfTheWordList, e);
+		}
 	}
 
 	public static Map<Integer, String> readDefaultWordlist(String nameOfTheWordList) {
@@ -49,7 +54,8 @@ public class WordlistInteractions {
 			hangmanWords = new ReadWordList().readDefaultWordList(nameOfTheWordList);
 
 		} catch (IOException e) {
-			LOGGER.error("Something went wrong while trying to read the default wordlist [{}]. /nStacktrace: {}", nameOfTheWordList, e);
+			LOGGER.error("Something went wrong while trying to read the default wordlist [{}]. /nStacktrace: {}",
+					nameOfTheWordList, e);
 		}
 		return hangmanWords;
 	}
@@ -58,9 +64,10 @@ public class WordlistInteractions {
 		Map<Integer, String> hangmanWords = null;
 		try {
 			hangmanWords = new ReadWordList().readUserDefinedWordList(nameOfTheWordList);
-		
+
 		} catch (IOException e) {
-			LOGGER.error("Something went wrong while trying to read user defined wordlist [{}]. /nStacktrace: {}", nameOfTheWordList, e);
+			LOGGER.error("Something went wrong while trying to read user defined wordlist [{}]. /nStacktrace: {}",
+					nameOfTheWordList, e);
 		}
 		return hangmanWords;
 	}

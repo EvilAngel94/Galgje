@@ -22,14 +22,14 @@ class UpdateWordlist {
 		super();
 	}
 	
-	public static void updateWordlist(String nameOfTheWordlist, Map<Integer, String> hangmanWords) {
+	public static void updateWordlist(String nameOfTheWordlist, Map<Integer, String> hangmanWords) throws IOException {
 		try (FileWriter csvWriter = new FileWriter(new File("./user_wordlist/" + nameOfTheWordlist))) {
 
-			WordlistUtils.writeUserDefinedWordsToCsv(nameOfTheWordlist, hangmanWords, csvWriter);
+			WordlistUtils.updateCsvFileWithAllWords(nameOfTheWordlist, hangmanWords, csvWriter);
 
 			LOGGER.info("Succesfully updated {}", nameOfTheWordlist);
-		} catch (IOException e) {
-			LOGGER.info("Could not add new word to exising file {} /nStacktrace:{}", nameOfTheWordlist, e.getMessage());
+		} catch (IOException ioException) {
+			throw ioException;
 		}
 	}
 

@@ -45,6 +45,7 @@ class ReadWordList {
 		} catch (FileNotFoundException e) {
 			LOGGER.error("File with name {} cannot be found! Make sure the name is spelled correctly. error: {}",
 					nameOfTheWordList, e);
+			throw e;
 		}
 		return hangmanWords;
 	}
@@ -65,9 +66,10 @@ class ReadWordList {
 
 			addWordsToHangmanMap(reader);
 
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException ex) {
 			LOGGER.error("File with name {} cannot be found! Make sure the name is spelled correctly. error: {}",
-					nameOfTheWordList, e);
+					nameOfTheWordList, ex);
+			throw ex;
 		}
 		return hangmanWords;
 

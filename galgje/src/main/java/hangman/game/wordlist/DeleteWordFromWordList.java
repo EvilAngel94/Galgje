@@ -25,9 +25,10 @@ class DeleteWordFromWordList {
 				.filter(entry -> entry.getValue().equals(wordToDelete)).findAny();
 
 		if (foundEntry.isPresent()) {
+			LOGGER.info("Word {} is found and will be deleted.", wordToDelete);
 			Entry<Integer, String> hangmanword = foundEntry.get();
 			hangmanwords.remove(hangmanword.getKey());
-			UpdateWordlist.updateWordlist(nameOfTheWordList, hangmanwords);
+			WordlistInteractions.updateWordlist(nameOfTheWordList, hangmanwords);
 		}
 	}
 }

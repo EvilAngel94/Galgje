@@ -15,20 +15,20 @@ class WordlistUtils {
 		super();
 	}
 
-	static void writeUserDefinedWordsToCsv(String nameOfTheWordlist, Map<Integer, String> hangmanWords,
+	static void updateCsvFileWithAllWords(String nameOfTheWordlist, Map<Integer, String> hangmanWords,
 			FileWriter csvWriter) throws IOException {
 
-		writeToCsvFile(nameOfTheWordlist, hangmanWords, csvWriter, null);
+		writeAllWordsToCsvFile(nameOfTheWordlist, hangmanWords, csvWriter, null);
 	}
 
-	static void writeUserDefinedWordsToCsv(String nameOfTheWordList, Map<Integer, String> hangmanWords,
+	static void writeUserDefinedWordToCsv(String nameOfTheWordList, Map<Integer, String> hangmanWords,
 			String wordToAdd, FileWriter csvWriter) throws IOException {
 
 		String entityCombination = ((hangmanWords.size() + 1) + "") + "," + wordToAdd;
-		writeToCsvFile(nameOfTheWordList, hangmanWords, csvWriter, entityCombination);
+		writeAllWordsToCsvFile(nameOfTheWordList, hangmanWords, csvWriter, entityCombination);
 	}
 
-	private static void writeToCsvFile(String nameOfTheWordlist, Map<Integer, String> hangmanWords,
+	private static void writeAllWordsToCsvFile(String nameOfTheWordlist, Map<Integer, String> hangmanWords,
 			FileWriter csvWriter, String entryCombination) throws IOException {
 
 		String naam = nameOfTheWordlist.contains("dutch") ? "nederlands" : "english";
@@ -46,6 +46,7 @@ class WordlistUtils {
 			csvWriter.append(entryCombination);
 			LOGGER.info("Succesfully added word to csv file {}", entryCombination);
 		}
+		
 		csvWriter.flush();
 	}
 
