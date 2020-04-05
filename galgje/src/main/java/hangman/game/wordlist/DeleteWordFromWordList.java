@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class DeleteWordFromWordList {
+class DeleteWordFromWordList {
 
 	private static final Logger LOGGER = LogManager.getLogger(DeleteWordFromWordList.class);
 

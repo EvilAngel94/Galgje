@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
  * @author Michiel de Smet
  *
  */
-public class UpdateWordlist {
+class UpdateWordlist {
 	
 	private static final Logger LOGGER = LogManager.getLogger(UpdateWordlist.class);
 

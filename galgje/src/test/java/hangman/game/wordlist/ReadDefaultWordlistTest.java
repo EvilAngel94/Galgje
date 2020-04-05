@@ -12,29 +12,27 @@ public class ReadDefaultWordlistTest {
 
 	private Map<Integer, String> galgjeWoorden = new HashMap<>();
 
-	private ReadWordList reader = new ReadWordList();
-
 	@Test
 	public void readCSV4WordsDutch() throws IOException {
-		galgjeWoorden = reader.readDefaultWordList("4_words_dutch.csv");
+		galgjeWoorden = WordlistInteractions.readDefaultWordlist("4_words_dutch.csv");
 		assertEquals(60, galgjeWoorden.size());
 	}
 
 	@Test
 	public void readCSV5WordsDutch() throws IOException {
-		galgjeWoorden = reader.readDefaultWordList("5_words_dutch.csv");
+		galgjeWoorden = WordlistInteractions.readDefaultWordlist("5_words_dutch.csv");
 		assertEquals(60, galgjeWoorden.size());
 	}
 
 	@Test
 	public void readCsv4WordEnglish() throws IOException {
-		galgjeWoorden = reader.readDefaultWordList("4_words_english.csv");
+		galgjeWoorden = WordlistInteractions.readDefaultWordlist("4_words_english.csv");
 		assertEquals(60, galgjeWoorden.size());
 	}
 
 	@Test
 	public void readCsv5WordEnglish() throws IOException {
-		galgjeWoorden = reader.readDefaultWordList("5_words_english.csv");
+		galgjeWoorden = WordlistInteractions.readDefaultWordlist("5_words_english.csv");
 		assertEquals(60, galgjeWoorden.size());
 	}
 }

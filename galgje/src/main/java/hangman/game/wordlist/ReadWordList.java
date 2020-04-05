@@ -13,13 +13,13 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ReadWordList {
+class ReadWordList {
 	private static final Logger LOGGER = LogManager.getLogger(ReadWordList.class);
 
-	private Map<Integer, String> hangmanWords;
+	private Map<Integer, String> hangmanWords = null;
 
 	public ReadWordList() {
-		hangmanWords = new HashMap<>();
+		super();
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class ReadWordList {
 		try (BufferedReader reader = new BufferedReader(inputReader)) {
 
 			addWordsToHangmanMap(reader);
-			
+
 		} catch (FileNotFoundException e) {
 			LOGGER.error("File with name {} cannot be found! Make sure the name is spelled correctly. error: {}",
 					nameOfTheWordList, e);
@@ -50,7 +50,8 @@ public class ReadWordList {
 	}
 
 	/**
-	 * This method is responsible for reading user created wordlists. These lists have a default 50 words, and possible addidional words added by the user.
+	 * This method is responsible for reading user created wordlists. These lists
+	 * have a default 50 words, and possible addidional words added by the user.
 	 * 
 	 * @param nameOfTheWordList
 	 * 
@@ -63,7 +64,7 @@ public class ReadWordList {
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
 			addWordsToHangmanMap(reader);
-			
+
 		} catch (FileNotFoundException e) {
 			LOGGER.error("File with name {} cannot be found! Make sure the name is spelled correctly. error: {}",
 					nameOfTheWordList, e);
@@ -74,6 +75,7 @@ public class ReadWordList {
 
 	private void addWordsToHangmanMap(BufferedReader reader) throws IOException {
 		String seperator = ",";
+		hangmanWords = new HashMap<>();
 
 		// first line should be ignored, that's why the value is not used
 		String line = reader.readLine();
