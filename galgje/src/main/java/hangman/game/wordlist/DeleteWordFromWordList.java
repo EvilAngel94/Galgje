@@ -12,17 +12,14 @@ public class DeleteWordFromWordList {
 
 	private static final Logger LOGGER = LogManager.getLogger(DeleteWordFromWordList.class);
 
-	private ReadWordList readWordlist;
-
-	public DeleteWordFromWordList() {
+	private DeleteWordFromWordList() {
 		super();
-		this.readWordlist = new ReadWordList();
 	}
 
-	public void deleteWordFromCsvList(String nameOfTheWordList, String wordToDelete) throws IOException {
+	public static void deleteWordFromCsvList(String nameOfTheWordList, String wordToDelete) throws IOException {
 		LOGGER.info("Trying to delete {} from file {}", wordToDelete, nameOfTheWordList);
 
-		Map<Integer, String> hangmanwords = readWordlist.readUserDefinedWordList(nameOfTheWordList);
+		Map<Integer, String> hangmanwords = new ReadWordList().readUserDefinedWordList(nameOfTheWordList);
 
 		Optional<Entry<Integer, String>> foundEntry = hangmanwords.entrySet().stream()
 				.filter(entry -> entry.getValue().equals(wordToDelete)).findAny();

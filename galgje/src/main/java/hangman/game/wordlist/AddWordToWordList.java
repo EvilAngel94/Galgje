@@ -19,44 +19,26 @@ public class AddWordToWordList {
 
 	private static final Logger LOGGER = LogManager.getLogger(AddWordToWordList.class);
 
-	private ReadWordList reader = new ReadWordList();
-
-	public AddWordToWordList() {
+	private AddWordToWordList() {
 		super();
 	}
 
-	public void addNewWordToCsvList(String nameOfTheWordList, String wordToAdd) throws IOException {
+	public static void addNewWordToCsvList(String nameOfTheWordList, String wordToAdd) throws IOException {
 		LOGGER.info("{} tries to be added to {}", wordToAdd, nameOfTheWordList);
 
-		Map<Integer, String> hangmanWords = reader.readUserDefinedWordList(nameOfTheWordList);
+		Map<Integer, String> hangmanWords = new ReadWordList().readUserDefinedWordList(nameOfTheWordList);
 
 		addNewWordToCsvFile(nameOfTheWordList, hangmanWords, wordToAdd);
 	}
 
-	private void addNewWordToCsvFile(String nameOfTheWordList, Map<Integer, String> hangmanWords, String wordToAdd) {
-		int numberKey = hangmanWords.size() + 1;
-
+	private static void addNewWordToCsvFile(String nameOfTheWordList, Map<Integer, String> hangmanWords, String wordToAdd) {
 		try (FileWriter csvWriter = new FileWriter(new File("./user_wordlist/" + nameOfTheWordList))) {
 
-			String naam = nameOfTheWordList.contains("dutch") ? "nederlands" : "english";
-
-			csvWriter.append("id," + naam + "\n");
-
-			hangmanWords.forEach((key, value) -> {
-				try {
-					csvWriter.append((key + "") + "," + value + "\n");
-				} catch (IOException e) {
-					LOGGER.debug("Could not append {} {}. /nStacktrace: {}", key, value, e);
-				}
-			});
-
-			String entityCombination = (numberKey + "") + "," + wordToAdd;
-			csvWriter.append(entityCombination);
-			csvWriter.flush();
-
-			LOGGER.info("Succesfully added word to csv file {}", entityCombination);
+			WordlistUtils.writeUserDefinedWordsToCsv(nameOfTheWordList, hangmanWords, wordToAdd, csvWriter);
+			
 		} catch (IOException e) {
 			LOGGER.info("Could not add new word to exising file {} /nStacktrace:{}", nameOfTheWordList, e.getMessage());
 		}
 	}
+
 }

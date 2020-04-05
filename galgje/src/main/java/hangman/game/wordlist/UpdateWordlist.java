@@ -22,26 +22,15 @@ public class UpdateWordlist {
 		super();
 	}
 	
-	public static void updateWordlist(String nameOfTheWordList, Map<Integer, String> hangmanWords) {
-		try (FileWriter csvWriter = new FileWriter(new File("./user_wordlist/" + nameOfTheWordList))) {
+	public static void updateWordlist(String nameOfTheWordlist, Map<Integer, String> hangmanWords) {
+		try (FileWriter csvWriter = new FileWriter(new File("./user_wordlist/" + nameOfTheWordlist))) {
 
-			String naam = nameOfTheWordList.contains("dutch") ? "nederlands" : "english";
+			WordlistUtils.writeUserDefinedWordsToCsv(nameOfTheWordlist, hangmanWords, csvWriter);
 
-			csvWriter.append("id," + naam + "\n");
-
-			hangmanWords.forEach((key, value) -> {
-				try {
-					csvWriter.append((key + "") + "," + value + "\n");
-				} catch (IOException e) {
-					LOGGER.debug("Could not append {} {}. /nStacktrace: {}", key, value, e);
-				}
-			});
-
-			csvWriter.flush();
-
-			LOGGER.info("Succesfully updated {}", nameOfTheWordList);
+			LOGGER.info("Succesfully updated {}", nameOfTheWordlist);
 		} catch (IOException e) {
-			LOGGER.info("Could not add new word to exising file {} /nStacktrace:{}", nameOfTheWordList, e.getMessage());
+			LOGGER.info("Could not add new word to exising file {} /nStacktrace:{}", nameOfTheWordlist, e.getMessage());
 		}
 	}
+
 }
