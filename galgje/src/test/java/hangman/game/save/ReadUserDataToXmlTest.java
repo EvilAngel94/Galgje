@@ -10,10 +10,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import hangman.game.save.ReadUserDataToXml;
-import hangman.game.save.SaveUserDataToXml;
-import hangman.game.save.UserData;
-
 public class ReadUserDataToXmlTest {
 
 	@Before
