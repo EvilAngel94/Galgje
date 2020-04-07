@@ -1,4 +1,4 @@
-package hangman.game.save;
+package hangman.game.saveOLD;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -11,6 +11,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import hangman.game.saveOLD.SaveUserDataToXml;
+import hangman.game.saveOLD.UserData;
 import utils.TestUtils;
 
 public class SaveUserDataXmlTest {

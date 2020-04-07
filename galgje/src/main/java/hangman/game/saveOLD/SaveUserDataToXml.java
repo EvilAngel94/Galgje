@@ -1,4 +1,4 @@
-package hangman.game.save;
+package hangman.game.saveOLD;
 
 import java.io.File;
 
@@ -31,7 +31,7 @@ public class SaveUserDataToXml {
 	public boolean saveData(boolean unittest) {
 
 		if (!userData.isValid()) {
-			LOGGER.debug("UserData does not have valid values! {}", userData.toString());
+			LOGGER.debug("UserData does not have valid values! {}", userData);
 			return false;
 		}
 

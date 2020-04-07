@@ -64,8 +64,8 @@ public class TestUtils {
 		return nameOfFile;
 	}
 	
-	public void deleteTestCsvFile() {
-		new File("./user_wordlist/test.csv").deleteOnExit();		
+	public void deleteTestFile(String testFileName) {
+		new File(testFileName).deleteOnExit();	
 	}
 
 	private Map<Integer, String> createStubMap() {
@@ -75,5 +75,7 @@ public class TestUtils {
 		}
 		return galgjeWoorden;
 	}
+
+	
 	
 }

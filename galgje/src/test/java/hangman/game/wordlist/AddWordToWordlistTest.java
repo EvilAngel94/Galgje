@@ -13,6 +13,7 @@ import utils.TestUtils;
 
 public class AddWordToWordlistTest {
 
+	private static final String LOCATION_TESTFILE = "./user_wordlist/test.csv";
 	private String nameOfTheFile;
 
 	@Before
@@ -22,7 +23,7 @@ public class AddWordToWordlistTest {
 
 	@After
 	public void teardown() {
-		TestUtils.getInstance().deleteTestCsvFile();
+		TestUtils.getInstance().deleteTestFile(LOCATION_TESTFILE);	
 	}
 
 	@Test

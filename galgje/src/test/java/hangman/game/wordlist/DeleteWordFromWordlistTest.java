@@ -14,6 +14,7 @@ import utils.TestUtils;
 
 public class DeleteWordFromWordlistTest {
 
+	private static final String LOCATION_TESTFILE = "./user_wordlist/test.csv";
 	private String nameOfTheFile;
 	private Map<Integer, String> galgjeWoorden;
 
@@ -24,7 +25,7 @@ public class DeleteWordFromWordlistTest {
 	
 	@After
 	public void teardown() {
-		TestUtils.getInstance().deleteTestCsvFile();
+		TestUtils.getInstance().deleteTestFile(LOCATION_TESTFILE);
 	}
 
 	@Test
