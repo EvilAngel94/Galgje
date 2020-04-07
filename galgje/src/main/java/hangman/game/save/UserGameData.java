@@ -12,6 +12,11 @@ public class UserGameData {
 		this.livesUsed = livesUsed;
 	}
 	
+	public UserGameData() {
+		this(0, 0);
+		this.gamesPlayed = 0;
+	}
+	
 	public int getGamesPlayed() {
 		return gamesPlayed;
 	}

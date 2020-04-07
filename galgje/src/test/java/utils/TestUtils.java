@@ -12,6 +12,10 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
+import com.google.gson.Gson;
+
+import hangman.game.save.UserGameData;
+
 public class TestUtils {
 
 	private static TestUtils instance;
@@ -44,7 +48,7 @@ public class TestUtils {
 
 	public String createTestCsvFile() {
 		String nameOfFile = "test.csv";
-		
+
 		try (FileWriter csvWriter = new FileWriter(new File("./user_wordlist/" + nameOfFile))) {
 			csvWriter.append("id,test\n");
 			createStubMap().forEach((key, value) -> {
@@ -56,16 +60,28 @@ public class TestUtils {
 			});
 
 			csvWriter.flush();
-			
+
 		} catch (Exception ex) {
 			fail("Something went wrong in testUtils.");
 		}
-		
+
 		return nameOfFile;
 	}
-	
+
+	public void createTestJsonFile(String testFileName) {
+
+		try (FileWriter writer = new FileWriter(new File(testFileName))) {
+
+			new Gson().toJson(new UserGameData(10, 10), writer);
+
+		} catch (IOException e) {
+			fail("Could not create test JSON");
+		}
+
+	}
+
 	public void deleteTestFile(String testFileName) {
-		new File(testFileName).deleteOnExit();	
+		new File(testFileName).deleteOnExit();
 	}
 
 	private Map<Integer, String> createStubMap() {
@@ -76,6 +92,4 @@ public class TestUtils {
 		return galgjeWoorden;
 	}
 
-	
-	
 }
