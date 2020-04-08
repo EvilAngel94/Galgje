@@ -71,8 +71,12 @@ public class TestUtils {
 	public void createTestJsonFile(String testFileName) {
 
 		try (FileWriter writer = new FileWriter(new File(testFileName))) {
-
-			new Gson().toJson(new UserGameData(10, 10), writer);
+			UserGameData gameData = new UserGameData();
+			gameData.setGamesPlayed(1);
+			gameData.setLivesUsed(7);
+			gameData.setWordsSolved(1);
+			
+			new Gson().toJson(gameData, writer);
 
 		} catch (IOException e) {
 			fail("Could not create test JSON");

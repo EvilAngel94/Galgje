@@ -1,5 +1,6 @@
 package hangman.game.save;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -17,9 +18,15 @@ public class ReadUserGameData {
 		super();
 	}
 
-	public UserGameData readUserGameData(String fileName) {
+	public UserGameData readUserGameData(String fileName) throws IOException {
 		UserGameData userGameData = null;
 		Gson gson = new Gson();
+		
+		File file = new File(fileName);
+		
+		if(!file.exists()) {
+			return new UserGameData();
+		}
 		
 		try (Reader reader = new FileReader(fileName)) {
 			
@@ -27,8 +34,7 @@ public class ReadUserGameData {
 
 		} catch (IOException ex) {
 			LOGGER.error("Error while reading userdata {}", ex);
-			LOGGER.info("New user game data is created.");
-			userGameData = new UserGameData();
+			throw ex;
 		}
 
 		return userGameData;

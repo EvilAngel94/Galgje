@@ -19,7 +19,7 @@ public class SaveUserGameData {
 		this.userGameData = userGameData;
 	}
 
-	public boolean saveUserGameData(String filename) throws IOException {
+	public boolean saveUserGameData(String fileName) throws IOException {
 		Gson gson = new Gson();
 
 		if (!userGameData.isValid()) {
@@ -27,7 +27,10 @@ public class SaveUserGameData {
 			return false;
 		}
 		
-		try (FileWriter writer = new FileWriter(new File(filename))) {
+		UserGameData oldUserGameData = new ReadUserGameData().readUserGameData(fileName);
+		userGameData = addOldGameDataToNewGameData(oldUserGameData);
+		
+		try (FileWriter writer = new FileWriter(new File(fileName))) {
 
 			gson.toJson(userGameData, writer);
 
@@ -37,5 +40,13 @@ public class SaveUserGameData {
 		}
 
 		return true;
+	}
+
+	private UserGameData addOldGameDataToNewGameData(UserGameData oldUserGameData) throws IOException {
+		userGameData.setGamesPlayed(oldUserGameData.getGamesPlayed() + 1);
+		userGameData.setLivesUsed(userGameData.getLivesUsed() + oldUserGameData.getLivesUsed());
+		userGameData.setWordsSolved(userGameData.getWordsSolved() + oldUserGameData.getWordsSolved());
+		
+		return userGameData;
 	}
 }

@@ -2,6 +2,8 @@ package hangman.game.save;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,12 +25,19 @@ public class ReadUserGameDataTest {
 	}
 
 	@Test
-	public void readDataCorrect() {
-
+	public void readDataCorrect() throws IOException {
 		UserGameData userdata = new ReadUserGameData().readUserGameData(TEST_FILE_NAME);
-//		assertEquals(1, userdata.getGamesPlayed());
-		assertEquals(10, userdata.getWordsSolved());
-		assertEquals(10, userdata.getLivesUsed());
+		assertEquals(1, userdata.getGamesPlayed());
+		assertEquals(1, userdata.getWordsSolved());
+		assertEquals(7, userdata.getLivesUsed());
+	}
+
+	@Test
+	public void newUserIsCreated() throws IOException {
+		UserGameData userdata = new ReadUserGameData().readUserGameData("InvalidLocation");
+		assertEquals(0, userdata.getGamesPlayed());
+		assertEquals(0, userdata.getLivesUsed());
+		assertEquals(0, userdata.getWordsSolved());
 	}
 
 }
