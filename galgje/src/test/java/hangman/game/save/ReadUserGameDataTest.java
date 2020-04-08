@@ -26,7 +26,7 @@ public class ReadUserGameDataTest {
 
 	@Test
 	public void readDataCorrect() throws IOException {
-		UserGameData userdata = new ReadUserGameData().readUserGameData(TEST_FILE_NAME);
+		UserGameData userdata = ReadUserGameData.readUserGameData(TEST_FILE_NAME);
 		assertEquals(1, userdata.getGamesPlayed());
 		assertEquals(1, userdata.getWordsSolved());
 		assertEquals(7, userdata.getLivesUsed());
@@ -34,7 +34,7 @@ public class ReadUserGameDataTest {
 
 	@Test
 	public void newUserIsCreated() throws IOException {
-		UserGameData userdata = new ReadUserGameData().readUserGameData("InvalidLocation");
+		UserGameData userdata = ReadUserGameData.readUserGameData("InvalidLocation");
 		assertEquals(0, userdata.getGamesPlayed());
 		assertEquals(0, userdata.getLivesUsed());
 		assertEquals(0, userdata.getWordsSolved());

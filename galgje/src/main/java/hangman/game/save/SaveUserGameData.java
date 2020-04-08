@@ -27,7 +27,7 @@ public class SaveUserGameData {
 			return false;
 		}
 		
-		UserGameData oldUserGameData = new ReadUserGameData().readUserGameData(fileName);
+		UserGameData oldUserGameData = ReadUserGameData.readUserGameData(fileName);
 		userGameData = addOldGameDataToNewGameData(oldUserGameData);
 		
 		try (FileWriter writer = new FileWriter(new File(fileName))) {

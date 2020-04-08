@@ -14,11 +14,11 @@ public class ReadUserGameData {
 
 	private static final Logger LOGGER = LogManager.getLogger(ReadUserGameData.class);
 
-	public ReadUserGameData() {
+	private ReadUserGameData() {
 		super();
 	}
 
-	public UserGameData readUserGameData(String fileName) throws IOException {
+	public static UserGameData readUserGameData(String fileName) throws IOException {
 		UserGameData userGameData = null;
 		Gson gson = new Gson();
 		

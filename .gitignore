@@ -4,3 +4,7 @@ galgje/userData.xml
 galgje/UserGameDataTest.json
 
 galgje/Hangman.log
+
+galgje/UserGameData.json
+
+*.log

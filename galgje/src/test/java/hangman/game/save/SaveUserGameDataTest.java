@@ -37,7 +37,7 @@ public class SaveUserGameDataTest {
 		saveUserGameData = new SaveUserGameData(userGameData);
 		assertTrue(saveUserGameData.saveUserGameData(TEST_FILE_NAME));
 
-		userGameData = new ReadUserGameData().readUserGameData(TEST_FILE_NAME);
+		userGameData = ReadUserGameData.readUserGameData(TEST_FILE_NAME);
 		assertEquals(2, userGameData.getWordsSolved());
 		assertEquals(2, userGameData.getGamesPlayed());
 		assertEquals(10, userGameData.getLivesUsed());
