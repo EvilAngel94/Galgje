@@ -75,6 +75,13 @@ public class MainMenu {
 
 			break;
 
+		case 5: // Add words to the list
+			System.out.println("Voeg woorden toe aan je lijst");
+			WordListInteractionUI wordlistInteractionUI = new WordListInteractionUI(scanner, isDutch);
+			wordlistInteractionUI.selectOptionToBePreformed();
+			
+			break;
+
 		default: // Unknow choice
 			System.out.println(PropertyReader.getProperty("mainmenu.choice.unknow", isDutch));
 		}
@@ -108,7 +115,7 @@ public class MainMenu {
 			return false;
 		}
 
-		if (Validator.inputIsGreaterThanHighestValue(input, 4)) {
+		if (Validator.inputIsGreaterThanHighestValue(input, 5)) {
 			LOGGER.debug("Input is greater than the higest value. Input should be smaller than {}", 4);
 			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch));
 			return false;

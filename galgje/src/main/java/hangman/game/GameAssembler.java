@@ -26,7 +26,7 @@ public class GameAssembler {
 	private static final Logger LOGGER = LogManager.getLogger(GameAssembler.class);
 
 	private final Scanner scanner;
-	
+
 	private boolean isDutch;
 
 	public GameAssembler(Scanner scanner, boolean isDutch) {
@@ -44,10 +44,10 @@ public class GameAssembler {
 		int returnToMainMenu = 0;
 
 		GameLoop gameLoop = new GameLoop(scanner, retreiveHangmanWords(), isDutch);
-		
+
 		do {
-			
-			if(returnToMainMenu == 3) {
+
+			if (returnToMainMenu == 3) {
 				gameLoop = new GameLoop(scanner, retreiveHangmanWords(), isDutch);
 			}
 
@@ -63,16 +63,15 @@ public class GameAssembler {
 
 	private Map<Integer, String> retreiveHangmanWords() {
 
-		SelectWordLengthUI selectLengthGUI = new SelectWordLengthUI(scanner, isDutch);
 		Map<Integer, String> hangmanWords = new HashMap<>();
 
 		try {
-			hangmanWords = selectLengthGUI.loadWordList();
+			hangmanWords = new SelectWordLengthUI(scanner, isDutch).loadWordList();
 
 		} catch (IOException e) {
 			LOGGER.error("Game is stoped, something went wrong while loading the words from the file. IOError: {}", e);
 		}
-		
+
 		return hangmanWords;
 	}
 

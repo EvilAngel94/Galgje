@@ -29,15 +29,17 @@ public class Validator {
 		if(input == null || input.equals("")) {
 			return true;
 		}
-		int keuze = Integer.parseInt(input);
-		return keuze < smallestValue;
+		return Integer.parseInt(input) < smallestValue;
 	}
 
 	public static boolean inputIsGreaterThanHighestValue(String input, int highestValue) {
 		if(input == null || input.equals("")) {
 			return true;
 		}
-		int keuze = Integer.parseInt(input);
-		return keuze > highestValue;
+		return Integer.parseInt(input) > highestValue;
+	}
+	
+	public static boolean isAlpabetic(String input) {
+		return input.chars().allMatch(Character::isLetter);
 	}
 }
