@@ -84,6 +84,7 @@ public class MainMenu {
 
 		default: // Unknow choice
 			System.out.println(PropertyReader.getProperty("mainmenu.choice.unknow", isDutch));
+			break;
 		}
 
 		return continueGame;

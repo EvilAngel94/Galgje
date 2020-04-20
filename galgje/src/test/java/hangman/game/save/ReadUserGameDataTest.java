@@ -15,12 +15,12 @@ public class ReadUserGameDataTest {
 	private static final String TEST_FILE_NAME = "UserGameDataTest.json";
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		TestUtils.getInstance().createTestJsonFile(TEST_FILE_NAME);
 	}
 
 	@After
-	public void teardown() {
+	public void tearDown() {
 		TestUtils.getInstance().deleteTestFile(TEST_FILE_NAME);
 	}
 

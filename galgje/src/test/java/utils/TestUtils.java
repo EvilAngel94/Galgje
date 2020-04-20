@@ -36,7 +36,7 @@ public class TestUtils {
 
 		try {
 			String xmlBestandVanUserData = FileUtils.readFileToString(userDataXml, StandardCharsets.UTF_8);
-			// "brief::contains" is hetzelfde als "gegevens -> brief.contains(gegevens));"
+			// "brief::contains" is hetzelfde als "gegevens -> brief.contains(gegevens)) "
 			elementIsGevonden = gegevensDieMoetenVoorkomen.stream().anyMatch(xmlBestandVanUserData::contains);
 
 		} catch (IOException e) {

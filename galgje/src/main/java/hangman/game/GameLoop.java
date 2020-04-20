@@ -41,8 +41,9 @@ public class GameLoop {
 	/**
 	 * This is the main game which will be played when choosing the game option.
 	 */
-	public int mainGameLoop(int life) {
+	public int mainGameLoop(final int life) {
 		String word = chooseRandomWord();
+		int livesRemaining = life;
 		int startLives = life;
 
 		char[] filler = createEmptyPlayableLine(word);
@@ -50,9 +51,9 @@ public class GameLoop {
 		ArrayList<Character> alreadyChosenOptions = new ArrayList<>();
 
 		// While the player has lives left, the main gameloop will run.
-		while (life > 0) {
-			System.out.println(
-					String.valueOf(filler) + " " + PropertyReader.getProperty("game.loop.life", isDutch) + life);
+		while (livesRemaining > 0) {
+			System.out.println(String.valueOf(filler) + " " + PropertyReader.getProperty("game.loop.life", isDutch)
+					+ livesRemaining);
 			char inputOfUser = scanner.next().charAt(0);
 
 			if (alreadyChosenOptions.contains(inputOfUser)) {
@@ -61,15 +62,15 @@ public class GameLoop {
 			}
 
 			alreadyChosenOptions.add(inputOfUser);
-			life = checkIfWordContainsInputCharacter(life, word, filler, inputOfUser);
+			livesRemaining = checkIfWordContainsInputCharacter(livesRemaining, word, filler, inputOfUser);
 
 			if (word.equals(String.valueOf(filler))) {
 				System.out.println(String.valueOf(filler) + PropertyReader.getProperty("game.loop.win", isDutch));
-				return wantToPlayAnotherGame(true, startLives - life);
+				return wantToPlayAnotherGame(true, startLives - livesRemaining);
 			}
 		}
 
-		if (life == 0) {
+		if (livesRemaining == 0) {
 			System.out.println(PropertyReader.getProperty("game.loop.correctword", isDutch) + word
 					+ PropertyReader.getProperty("game.loop.lost", isDutch));
 		}
@@ -78,7 +79,7 @@ public class GameLoop {
 	}
 
 	private int checkIfWordContainsInputCharacter(int life, String woord, char[] filler, char inputOfUser) {
-
+		int lifeRemain = life;
 		if (woord.contains(inputOfUser + "")) {
 			for (int letterInWord = 0; letterInWord < woord.length(); letterInWord++) {
 				// checks the character and will replace '-' by the character.
@@ -87,9 +88,9 @@ public class GameLoop {
 				}
 			}
 		} else {
-			life--; // Gaat leven eraf
+			lifeRemain--; // Gaat leven eraf
 		}
-		return life;
+		return lifeRemain;
 	}
 
 	/*

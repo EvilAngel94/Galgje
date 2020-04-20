@@ -19,12 +19,12 @@ public class DeleteWordFromWordlistTest {
 	private Map<Integer, String> galgjeWoorden;
 
 	@Before
-	public void setup() throws IOException {
+	public void setUp() throws IOException {
 		nameOfTheFile = TestUtils.getInstance().createTestCsvFile();
 	}
 	
 	@After
-	public void teardown() {
+	public void tearDown() {
 		TestUtils.getInstance().deleteTestFile(LOCATION_TESTFILE);
 	}
 

@@ -15,13 +15,13 @@ class WordlistUtils {
 		super();
 	}
 
-	static void updateCsvFileWithAllWords(String nameOfTheWordlist, Map<Integer, String> hangmanWords,
+	protected static void updateCsvFileWithAllWords(String nameOfTheWordlist, Map<Integer, String> hangmanWords,
 			FileWriter csvWriter) throws IOException {
 
 		writeAllWordsToCsvFile(nameOfTheWordlist, hangmanWords, csvWriter, null);
 	}
 
-	static void writeUserDefinedWordToCsv(String nameOfTheWordList, Map<Integer, String> hangmanWords,
+	protected static void writeUserDefinedWordToCsv(String nameOfTheWordList, Map<Integer, String> hangmanWords,
 			String wordToAdd, FileWriter csvWriter) throws IOException {
 
 		String entityCombination = ((hangmanWords.size() + 1) + "") + "," + wordToAdd;

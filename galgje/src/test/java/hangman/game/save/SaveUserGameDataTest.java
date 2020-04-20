@@ -17,7 +17,7 @@ public class SaveUserGameDataTest {
 	private SaveUserGameData saveUserGameData;
 
 	@After
-	public void teardown() {
+	public void tearDown() {
 		TestUtils.getInstance().deleteTestFile(TEST_FILE_NAME);
 	}
 

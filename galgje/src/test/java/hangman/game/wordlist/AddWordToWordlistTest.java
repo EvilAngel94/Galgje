@@ -17,12 +17,12 @@ public class AddWordToWordlistTest {
 	private String nameOfTheFile;
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		nameOfTheFile = TestUtils.getInstance().createTestCsvFile();
 	}
 
 	@After
-	public void teardown() {
+	public void tearDown() {
 		TestUtils.getInstance().deleteTestFile(LOCATION_TESTFILE);	
 	}
 

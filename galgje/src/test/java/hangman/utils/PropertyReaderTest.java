@@ -8,7 +8,7 @@ import org.junit.Test;
 public class PropertyReaderTest {
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		PropertyReader.getInstance();
 	}
 
