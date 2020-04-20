@@ -40,4 +40,8 @@ public class PropertyReader {
 	public static String getProperty(String name, boolean isDutch) {
 		return isDutch ? properties.getProperty(name) : properties.getProperty("en." + name);
 	}
+	
+	public String getProperty(String name) {
+		return properties.getProperty(name);
+	}
 }

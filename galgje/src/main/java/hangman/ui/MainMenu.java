@@ -6,9 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import hangman.game.GameAssembler;
-import hangman.game.save.UserData;
+import hangman.game.save.GameSaveInteractions;
+import hangman.game.save.UserGameData;
 import hangman.utils.PropertyReader;
-import hangman.utils.ReadUserDataToXml;
 import hangman.utils.Validator;
 
 /**
@@ -27,7 +27,7 @@ public class MainMenu {
 		super();
 		this.scanner = scanner;
 		this.isDutch = true;
-		
+
 		PropertyReader.getInstance();
 	}
 
@@ -40,9 +40,9 @@ public class MainMenu {
 		if (!isInputValid(userInput)) {
 			mainMenu();
 		}
-		
+
 		int keuze = Integer.parseInt(userInput);
-	
+
 		switch (keuze) {
 		case 1: // Main gameplay
 			System.out.println(PropertyReader.getProperty("mainmenu.choice.one", isDutch));
@@ -67,12 +67,18 @@ public class MainMenu {
 
 			selectLanguage(Integer.parseInt(userInput));
 			break;
-			
+
 		case 4: // View player stats
 			System.out.println(PropertyReader.getProperty("mainmenu.choice.four", isDutch));
-			
-			UserData userData = ReadUserDataToXml.readData(false);
-			System.out.println(userData.toString());
+			UserGameData userGameData = GameSaveInteractions.readUserGameData();
+			System.out.println(userGameData.toString());
+
+			break;
+
+		case 5: // Add words to the list
+			System.out.println("Voeg woorden toe aan je lijst");
+			WordListInteractionUI wordlistInteractionUI = new WordListInteractionUI(scanner, isDutch);
+			wordlistInteractionUI.selectOptionToBePreformed();
 			
 			break;
 
@@ -109,7 +115,7 @@ public class MainMenu {
 			return false;
 		}
 
-		if (Validator.inputIsGreaterThanHighestValue(input, 4)) {
+		if (Validator.inputIsGreaterThanHighestValue(input, 5)) {
 			LOGGER.debug("Input is greater than the higest value. Input should be smaller than {}", 4);
 			System.out.println(PropertyReader.getProperty("validation.input.toobig", isDutch));
 			return false;
@@ -119,8 +125,8 @@ public class MainMenu {
 	}
 
 	/*
-	 * This setter is only used to set a different language. 
-	 * At this moment, only Dutch or English can be played.
+	 * This setter is only used to set a different language. At this moment, only
+	 * Dutch or English can be played.
 	 */
 	private void setIsDutch(boolean isDutch) {
 		this.isDutch = isDutch;

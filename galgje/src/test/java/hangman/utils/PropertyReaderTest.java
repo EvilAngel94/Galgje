@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import hangman.utils.PropertyReader;
-
 public class PropertyReaderTest {
 
 	@Before

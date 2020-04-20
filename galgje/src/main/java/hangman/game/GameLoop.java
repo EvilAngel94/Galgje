@@ -10,9 +10,9 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import hangman.game.save.UserData;
+import hangman.game.save.GameSaveInteractions;
+import hangman.game.save.UserGameData;
 import hangman.utils.PropertyReader;
-import hangman.utils.SaveUserDataToXml;
 import hangman.utils.Validator;
 
 /**
@@ -134,8 +134,7 @@ public class GameLoop {
 	 */
 	private void saveUserStats(boolean wordSolved, int lives) {
 		int solved = wordSolved ? 1 : 0;
-		SaveUserDataToXml saveUserData = new SaveUserDataToXml(new UserData(solved, lives));
-		saveUserData.saveData(false);
+		GameSaveInteractions.saveUserGameData(new UserGameData(solved, lives));
 	}
 
 	/*
