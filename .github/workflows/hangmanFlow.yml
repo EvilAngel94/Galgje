@@ -25,4 +25,4 @@ jobs:
       with:
         java-version: 11
     - name: Build with Maven
-      run: mvn -f ./Hangman/galgje/pom.xml clean install
+      run: mvn -f /galgje/pom.xml clean install
