@@ -1,7 +1,5 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java CI with Maven Test
+name: Hangman CI
 
 on:
   push:
@@ -26,3 +24,5 @@ jobs:
         java-version: 11
     - name: Build with Maven
       run: mvn -f galgje/pom.xml clean install
+    - name: codacy-coverage-reporter
+      uses: codacy/codacy-coverage-reporter-action@0.1.0
